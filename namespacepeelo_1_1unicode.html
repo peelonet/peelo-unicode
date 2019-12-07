@@ -56,10 +56,6 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad5e873ad58986fbec0a7df1524ff4eb9"><td class="memItemLeft" align="right" valign="top">char32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepeelo_1_1unicode.html#ad5e873ad58986fbec0a7df1524ff4eb9">tolower</a> (char32_t c)</td></tr>
-<tr class="separator:ad5e873ad58986fbec0a7df1524ff4eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a931ca846d0ff485692399ba0767ff9fc"><td class="memItemLeft" align="right" valign="top">char32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepeelo_1_1unicode.html#a931ca846d0ff485692399ba0767ff9fc">toupper</a> (char32_t c)</td></tr>
-<tr class="separator:a931ca846d0ff485692399ba0767ff9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecd767bb36e64b15502c34266e76441d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepeelo_1_1unicode.html#aecd767bb36e64b15502c34266e76441d">isvalid</a> (char32_t c)</td></tr>
 <tr class="separator:aecd767bb36e64b15502c34266e76441d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1230a87121167229e1e60c8fce45334"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepeelo_1_1unicode.html#ab1230a87121167229e1e60c8fce45334">isalnum</a> (char32_t c)</td></tr>
@@ -86,6 +82,10 @@ Functions</h2></td></tr>
 <tr class="separator:a563a99a154fd8e1c6bb0837dac07156c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30665074180110455dc367d468bb2cb0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepeelo_1_1unicode.html#a30665074180110455dc367d468bb2cb0">ispunct</a> (char32_t c)</td></tr>
 <tr class="separator:a30665074180110455dc367d468bb2cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5e873ad58986fbec0a7df1524ff4eb9"><td class="memItemLeft" align="right" valign="top">char32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepeelo_1_1unicode.html#ad5e873ad58986fbec0a7df1524ff4eb9">tolower</a> (char32_t c)</td></tr>
+<tr class="separator:ad5e873ad58986fbec0a7df1524ff4eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a931ca846d0ff485692399ba0767ff9fc"><td class="memItemLeft" align="right" valign="top">char32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepeelo_1_1unicode.html#a931ca846d0ff485692399ba0767ff9fc">toupper</a> (char32_t c)</td></tr>
+<tr class="separator:a931ca846d0ff485692399ba0767ff9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ab1230a87121167229e1e60c8fce45334"></a>
@@ -93,15 +93,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::isalnum </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is alphanumeric. </p>
 
@@ -112,15 +120,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::isalpha </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is alphabetic. </p>
 
@@ -131,15 +147,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::isblank </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is a blank character. </p>
 
@@ -150,15 +174,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::iscntrl </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is a control character. </p>
 
@@ -169,15 +201,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::isdigit </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is a digit. </p>
 
@@ -188,15 +228,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::isgraph </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is a graphical character. </p>
 
@@ -207,15 +255,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::islower </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is lowercase. </p>
 
@@ -226,15 +282,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::isprint </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is a printing character. </p>
 
@@ -245,15 +309,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::ispunct </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is a punctuation character. </p>
 
@@ -264,15 +336,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::isspace </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is a space character. </p>
 
@@ -283,15 +363,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::isupper </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is an uppercase character. </p>
 
@@ -302,15 +390,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::isvalid </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether given Unicode code point is valid or not. </p>
 
@@ -321,15 +417,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool peelo::unicode::isxdigit </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Determines whether the given Unicode code point is a hexadecimal character. </p>
 
@@ -340,15 +444,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">char32_t peelo::unicode::tolower </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Converts given Unicode code point into lowercase. </p>
 
@@ -359,15 +471,23 @@ Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">char32_t peelo::unicode::toupper </td>
           <td>(</td>
           <td class="paramtype">char32_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Converts given Unicode code point into uppercase. </p>
 
