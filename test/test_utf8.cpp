@@ -29,8 +29,6 @@
 
 #include <peelo/unicode/encoding/utf8.hpp>
 
-#include <iostream>
-
 static void test_encode()
 {
   using peelo::unicode::encoding::utf8::encode;

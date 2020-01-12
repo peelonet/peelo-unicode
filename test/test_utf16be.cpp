@@ -29,8 +29,6 @@
 
 #include <peelo/unicode/encoding/utf16be.hpp>
 
-#include <iostream>
-
 static void test_encode()
 {
   using peelo::unicode::encoding::utf16be::encode;
