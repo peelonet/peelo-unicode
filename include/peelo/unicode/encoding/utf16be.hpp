@@ -27,7 +27,7 @@
 #include <cstddef>
 #include <string>
 
-#include <peelo/unicode/ctype.hpp>
+#include <peelo/unicode/ctype/isvalid.hpp>
 
 namespace peelo::unicode::encoding::utf16be
 {
@@ -63,7 +63,7 @@ namespace peelo::unicode::encoding::utf16be
     {
       const auto& c = input[i];
 
-      if (!peelo::unicode::isvalid(c))
+      if (!ctype::isvalid(c))
       {
         continue;
       }
@@ -173,7 +173,7 @@ namespace peelo::unicode::encoding::utf16be
     {
       const auto& c = input[i];
 
-      if (!peelo::unicode::isvalid(c))
+      if (!ctype::isvalid(c))
       {
         return false;
       }

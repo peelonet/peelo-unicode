@@ -24,23 +24,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_HPP_GUARD
+#ifndef PEELO_UNICODE_CTYPE_ISVALID_HPP_GUARD
+#define PEELO_UNICODE_CTYPE_ISVALID_HPP_GUARD
 
-#include <peelo/unicode/ctype/isalnum.hpp>
-#include <peelo/unicode/ctype/isalpha.hpp>
-#include <peelo/unicode/ctype/isblank.hpp>
-#include <peelo/unicode/ctype/iscntrl.hpp>
-#include <peelo/unicode/ctype/isdigit.hpp>
-#include <peelo/unicode/ctype/isgraph.hpp>
-#include <peelo/unicode/ctype/islower.hpp>
-#include <peelo/unicode/ctype/isprint.hpp>
-#include <peelo/unicode/ctype/ispunct.hpp>
-#include <peelo/unicode/ctype/isspace.hpp>
-#include <peelo/unicode/ctype/isupper.hpp>
-#include <peelo/unicode/ctype/isvalid.hpp>
-#include <peelo/unicode/ctype/isxdigit.hpp>
-#include <peelo/unicode/ctype/tolower.hpp>
-#include <peelo/unicode/ctype/toupper.hpp>
+namespace peelo::unicode::ctype
+{
+  /**
+   * Determines whether given Unicode code point is valid or not.
+   */
+  inline bool isvalid(char32_t c)
+  {
+    return !(c > 0x10ffff
+      || (c & 0xfffe) == 0xfffe
+      || (c >= 0xd800 && c <= 0xdfff)
+      || (c >= 0xfdd0 && c <= 0xfdef));
+  }
+}
 
-#endif /* !PEELO_UNICODE_CTYPE_HPP_GUARD */
+#endif /* !PEELO_UNICODE_CTYPE_ISVALID_HPP_GUARD */

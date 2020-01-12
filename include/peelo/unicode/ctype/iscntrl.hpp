@@ -24,23 +24,37 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_HPP_GUARD
+#ifndef PEELO_UNICODE_CTYPE_ISCNTRL_HPP_GUARD
+#define PEELO_UNICODE_CTYPE_ISCNTRL_HPP_GUARD
 
-#include <peelo/unicode/ctype/isalnum.hpp>
-#include <peelo/unicode/ctype/isalpha.hpp>
-#include <peelo/unicode/ctype/isblank.hpp>
-#include <peelo/unicode/ctype/iscntrl.hpp>
-#include <peelo/unicode/ctype/isdigit.hpp>
-#include <peelo/unicode/ctype/isgraph.hpp>
-#include <peelo/unicode/ctype/islower.hpp>
-#include <peelo/unicode/ctype/isprint.hpp>
-#include <peelo/unicode/ctype/ispunct.hpp>
-#include <peelo/unicode/ctype/isspace.hpp>
-#include <peelo/unicode/ctype/isupper.hpp>
-#include <peelo/unicode/ctype/isvalid.hpp>
-#include <peelo/unicode/ctype/isxdigit.hpp>
-#include <peelo/unicode/ctype/tolower.hpp>
-#include <peelo/unicode/ctype/toupper.hpp>
+namespace peelo::unicode::ctype
+{
+  /**
+   * Determines whether the given Unicode code point is a control character.
+   */
+  inline bool iscntrl(char32_t c)
+  {
+    static const char32_t cntrl_table[19][2] =
+    {
+      { 0x0000, 0x001f }, { 0x007f, 0x009f }, { 0x00ad, 0x00ad },
+      { 0x0600, 0x0603 }, { 0x06dd, 0x06dd }, { 0x070f, 0x070f },
+      { 0x17b4, 0x17b5 }, { 0x200b, 0x200f }, { 0x202a, 0x202e },
+      { 0x2060, 0x2063 }, { 0x206a, 0x206f }, { 0xd800, 0xf8ff },
+      { 0xfeff, 0xfeff }, { 0xfff9, 0xfffb }, { 0x1d173, 0x1d17a },
+      { 0xe0001, 0xe0001 }, { 0xe0020, 0xe007f }, { 0xf0000, 0xffffd },
+      { 0x100000, 0x10fffd }
+    };
 
-#endif /* !PEELO_UNICODE_CTYPE_HPP_GUARD */
+    for (int i = 0; i < 19; ++i)
+    {
+      if (c >= cntrl_table[i][0] && c <= cntrl_table[i][1])
+      {
+        return true;
+      }
+    }
+
+    return false;
+  }
+}
+
+#endif /* !PEELO_UNICODE_CTYPE_ISCNTRL_HPP_GUARD */

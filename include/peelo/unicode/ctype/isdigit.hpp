@@ -24,23 +24,38 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_HPP_GUARD
+#ifndef PEELO_UNICODE_CTYPE_ISDIGIT_HPP_GUARD
+#define PEELO_UNICODE_CTYPE_ISDIGIT_HPP_GUARD
 
-#include <peelo/unicode/ctype/isalnum.hpp>
-#include <peelo/unicode/ctype/isalpha.hpp>
-#include <peelo/unicode/ctype/isblank.hpp>
-#include <peelo/unicode/ctype/iscntrl.hpp>
-#include <peelo/unicode/ctype/isdigit.hpp>
-#include <peelo/unicode/ctype/isgraph.hpp>
-#include <peelo/unicode/ctype/islower.hpp>
-#include <peelo/unicode/ctype/isprint.hpp>
-#include <peelo/unicode/ctype/ispunct.hpp>
-#include <peelo/unicode/ctype/isspace.hpp>
-#include <peelo/unicode/ctype/isupper.hpp>
-#include <peelo/unicode/ctype/isvalid.hpp>
-#include <peelo/unicode/ctype/isxdigit.hpp>
-#include <peelo/unicode/ctype/tolower.hpp>
-#include <peelo/unicode/ctype/toupper.hpp>
+namespace peelo::unicode::ctype
+{
+  /**
+   * Determines whether the given Unicode code point is a digit.
+   */
+  inline bool isdigit(char32_t c)
+  {
+    static const char32_t digit_table[23][2] =
+    {
+      { 0x0030, 0x0039 }, { 0x0660, 0x0669 }, { 0x06f0, 0x06f9 },
+      { 0x0966, 0x096f }, { 0x09e6, 0x09ef }, { 0x0a66, 0x0a6f },
+      { 0x0ae6, 0x0aef }, { 0x0b66, 0x0b6f }, { 0x0be6, 0x0bef },
+      { 0x0c66, 0x0c6f }, { 0x0ce6, 0x0cef }, { 0x0d66, 0x0d6f },
+      { 0x0e50, 0x0e59 }, { 0x0ed0, 0x0ed9 }, { 0x0f20, 0x0f29 },
+      { 0x1040, 0x1049 }, { 0x17e0, 0x17e9 }, { 0x1810, 0x1819 },
+      { 0x1946, 0x194f }, { 0x19d0, 0x19d9 }, { 0xff10, 0xff19 },
+      { 0x104a0, 0x104a9 }, { 0x1d7ce, 0x1d7ff }
+    };
 
-#endif /* !PEELO_UNICODE_CTYPE_HPP_GUARD */
+    for (int i = 0; i < 23; ++i)
+    {
+      if (c >= digit_table[i][0] && c <= digit_table[i][1])
+      {
+        return true;
+      }
+    }
+
+    return false;
+  }
+}
+
+#endif /* !PEELO_UNICODE_CTYPE_ISDIGIT_HPP_GUARD */
