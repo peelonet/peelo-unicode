@@ -24,23 +24,21 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_HPP_GUARD
+#ifndef PEELO_UNICODE_CTYPE_ISXDIGIT_HPP_GUARD
+#define PEELO_UNICODE_CTYPE_ISXDIGIT_HPP_GUARD
 
-#include <peelo/unicode/ctype/isalnum.hpp>
-#include <peelo/unicode/ctype/isalpha.hpp>
-#include <peelo/unicode/ctype/isblank.hpp>
-#include <peelo/unicode/ctype/iscntrl.hpp>
-#include <peelo/unicode/ctype/isdigit.hpp>
-#include <peelo/unicode/ctype/isgraph.hpp>
-#include <peelo/unicode/ctype/islower.hpp>
-#include <peelo/unicode/ctype/isprint.hpp>
-#include <peelo/unicode/ctype/ispunct.hpp>
-#include <peelo/unicode/ctype/isspace.hpp>
-#include <peelo/unicode/ctype/isupper.hpp>
-#include <peelo/unicode/ctype/isvalid.hpp>
-#include <peelo/unicode/ctype/isxdigit.hpp>
-#include <peelo/unicode/ctype/tolower.hpp>
-#include <peelo/unicode/ctype/toupper.hpp>
+namespace peelo::unicode::ctype
+{
+  /**
+   * Determines whether the given Unicode code point is a hexadecimal
+   * character.
+   */
+  inline bool isxdigit(char32_t c)
+  {
+    return (c >= 'A' && c <= 'F')
+      || (c >= 'a' && c <= 'f')
+      || (c >= '0' && c <= '9');
+  }
+}
 
-#endif /* !PEELO_UNICODE_CTYPE_HPP_GUARD */
+#endif /* !PEELO_UNICODE_CTYPE_ISXDIGIT_HPP_GUARD */
