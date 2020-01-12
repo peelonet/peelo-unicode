@@ -24,13 +24,37 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_ENCODING_HPP_GUARD
-#define PEELO_UNICODE_ENCODING_HPP_GUARD
+#include <cassert>
+#include <cstdlib>
 
-#include <peelo/encoding/utf8.hpp>
-#include <peelo/encoding/utf16be.hpp>
-#include <peelo/encoding/utf16le.hpp>
-#include <peelo/encoding/utf32be.hpp>
-#include <peelo/encoding/utf32le.hpp>
+#include <peelo/unicode/encoding/utf32le.hpp>
 
-#endif /* !PEELO_UNICODE_ENCODING_HPP_GUARD */
+#include <iostream>
+
+static void test_encode()
+{
+  using peelo::unicode::encoding::utf32le::encode;
+
+  assert(!encode(U"$").compare(std::string("$\x00\x00\x00", 4)));
+  assert(!encode(U"¢").compare(std::string("\xa2\x00\x00\x00", 4)));
+  assert(!encode(U"€").compare(std::string("\xac \x00\x00", 4)));
+  assert(!encode(U"𐍈").compare(std::string("H\x03\x01\x00", 4)));
+}
+
+static void test_decode()
+{
+  using peelo::unicode::encoding::utf32le::decode;
+
+  assert(!decode(std::string("$\x00\x00\x00", 4)).compare(U"$"));
+  assert(!decode(std::string("\xa2\x00\x00\x00", 4)).compare(U"¢"));
+  assert(!decode(std::string("\xac \x00\x00", 4)).compare(U"€"));
+  assert(!decode(std::string("H\x03\x01\x00", 4)).compare(U"𐍈"));
+}
+
+int main()
+{
+  test_encode();
+  test_decode();
+
+  return EXIT_SUCCESS;
+}
