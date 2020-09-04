@@ -17,12 +17,6 @@ FOREACH(TEST_FILENAME ${TEST_SOURCES})
       cxx_std_17
   )
 
-  TARGET_COMPILE_OPTIONS(
-    ${TEST_NAME}
-    PRIVATE
-      -Wall -Werror
-  )
-
   TARGET_LINK_LIBRARIES(
     ${TEST_NAME}
     PeeloUnicode
