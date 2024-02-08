@@ -36,11 +36,11 @@ namespace peelo::unicode::ctype
   inline bool
   isblank(char32_t c)
   {
-    static const std::array<utils::range, 9> blank_table =
+    static const std::array<utils::range, 8> blank_table =
     {{
       { 0x0009, 0x0009 }, { 0x0020, 0x0020 }, { 0x00a0, 0x00a0 },
-      { 0x1680, 0x1680 }, { 0x180e, 0x180e }, { 0x2000, 0x200a },
-      { 0x202f, 0x202f }, { 0x205f, 0x205f }, { 0x3000, 0x3000 }
+      { 0x1680, 0x1680 }, { 0x2000, 0x200a }, { 0x202f, 0x202f },
+      { 0x205f, 0x205f }, { 0x3000, 0x3000 },
     }};
 
     return utils::table_lookup(blank_table, c);

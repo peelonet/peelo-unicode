@@ -27,6 +27,7 @@
 #pragma once
 
 #include <array>
+#include <unordered_map>
 #include <utility>
 
 namespace peelo::unicode::ctype::utils
@@ -34,7 +35,8 @@ namespace peelo::unicode::ctype::utils
   using range = std::pair<char32_t, char32_t>;
 
   template<std::size_t Size>
-  inline bool table_lookup(const std::array<range, Size>& table, char32_t c)
+  inline bool
+  table_lookup(const std::array<range, Size>& table, char32_t c)
   {
     const auto size = table.size();
 
@@ -49,5 +51,18 @@ namespace peelo::unicode::ctype::utils
     }
 
     return false;
+  }
+
+  inline char32_t
+  case_lookup(const std::unordered_map<char32_t, char32_t>& map, char32_t c)
+  {
+    const auto i = map.find(c);
+
+    if (i != std::end(map))
+    {
+      return i->second;
+    }
+
+    return c;
   }
 }

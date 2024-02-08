@@ -127,7 +127,7 @@ test_isgraph()
   assert(isgraph(U'€'));
 
   assert(!isgraph(U' '));
-  assert(!isgraph(U'\u093b'));
+  assert(!isgraph(0x205f));
 }
 
 static void
