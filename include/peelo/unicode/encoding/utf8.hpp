@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,13 +24,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_ENCODING_UTF8_HPP_GUARD
-#define PEELO_UNICODE_ENCODING_UTF8_HPP_GUARD
+#pragma once
 
-#include <cstddef>
-#include <string>
-
-#include <peelo/unicode/ctype/isvalid.hpp>
+#include <peelo/unicode/encoding/_utils.hpp>
 
 namespace peelo::unicode::encoding::utf8
 {
@@ -40,7 +36,8 @@ namespace peelo::unicode::encoding::utf8
    * beginning of sequence is invalid according to the UTF-8
    * specification), 0 will be returned instead.
    */
-  inline std::size_t sequence_length(unsigned char byte)
+  inline std::size_t
+  sequence_length(unsigned char byte)
   {
     if ((byte & 0x80) == 0x00)
     {
@@ -71,7 +68,8 @@ namespace peelo::unicode::encoding::utf8
    * given Unicode code point with UTF-8 character encoding. If the given
    * code point cannot be encoded, 0 will be returned instead.
    */
-  inline std::size_t codepoint_length(char32_t c)
+  inline std::size_t
+  codepoint_length(char32_t c)
   {
     if (c < 0x007f)
     {
@@ -93,30 +91,28 @@ namespace peelo::unicode::encoding::utf8
     }
   }
 
-  namespace internal
+  inline void
+  encode_codepoint(char32_t c, std::string& output)
   {
-    inline void encode_codepoint(char32_t c, std::string& output)
+    if (c <= 0x7f)
     {
-      if (c <= 0x7f)
-      {
-        output.append(1, static_cast<char>(c));
-      }
-      else if (c <= 0x07ff)
-      {
-        output.append(1, static_cast<char>(0xc0 | ((c & 0x7c0) >> 6)));
-        output.append(1, static_cast<char>(0x80 | (c & 0x3f)));
-      }
-      else if (c <= 0xffff)
-      {
-        output.append(1, static_cast<char>(0xe0 | ((c & 0xf000)) >> 12));
-        output.append(1, static_cast<char>(0x80 | ((c & 0xfc0)) >> 6));
-        output.append(1, static_cast<char>(0x80 | (c & 0x3f)));
-      } else {
-        output.append(1, static_cast<char>(0xf0 | ((c & 0x1c0000) >> 18)));
-        output.append(1, static_cast<char>(0x80 | ((c & 0x3f000) >> 12)));
-        output.append(1, static_cast<char>(0x80 | ((c & 0xfc0) >> 6)));
-        output.append(1, static_cast<char>(0x80 | (c & 0x3f)));
-      }
+      output.append(1, static_cast<char>(c));
+    }
+    else if (c <= 0x07ff)
+    {
+      output.append(1, static_cast<char>(0xc0 | ((c & 0x7c0) >> 6)));
+      output.append(1, static_cast<char>(0x80 | (c & 0x3f)));
+    }
+    else if (c <= 0xffff)
+    {
+      output.append(1, static_cast<char>(0xe0 | ((c & 0xf000)) >> 12));
+      output.append(1, static_cast<char>(0x80 | ((c & 0xfc0)) >> 6));
+      output.append(1, static_cast<char>(0x80 | (c & 0x3f)));
+    } else {
+      output.append(1, static_cast<char>(0xf0 | ((c & 0x1c0000) >> 18)));
+      output.append(1, static_cast<char>(0x80 | ((c & 0x3f000) >> 12)));
+      output.append(1, static_cast<char>(0x80 | ((c & 0xfc0) >> 6)));
+      output.append(1, static_cast<char>(0x80 | (c & 0x3f)));
     }
   }
 
@@ -124,115 +120,99 @@ namespace peelo::unicode::encoding::utf8
    * Encodes given Unicode character sequence into a byte string using UTF-8
    * character encoding. Encoding errors are ignored.
    */
-  inline std::string encode(const char32_t* input, const std::size_t length)
+  inline std::string
+  encode(const char32_t* input, std::size_t length)
   {
-    std::string output;
-
-    for (std::size_t i = 0; i < length; ++i)
-    {
-      const auto& c = input[i];
-
-      if (!ctype::isvalid(c))
-      {
-        continue;
-      }
-      internal::encode_codepoint(c, output);
-    }
-
-    return output;
+    return utils::encode(input, length, encode_codepoint);
   }
 
   /**
    * Encodes given Unicode string into a byte string using UTF-8 character
    * encoding. Encoding errors are ignored.
    */
-  inline std::string encode(const std::u32string& input)
+  inline std::string
+  encode(const std::u32string& input)
   {
-    return encode(input.c_str(), input.length());
+    return utils::encode(
+      input.c_str(),
+      input.length(),
+      encode_codepoint
+    );
   }
 
-  namespace internal
+  inline bool
+  decode_advance(
+    const char* input,
+    std::size_t& i,
+    const std::size_t length,
+    char32_t& result
+  )
   {
-    inline bool decode_advance(
-      const char* input,
-      std::size_t& i,
-      const std::size_t length,
-      char32_t& result
-    )
-    {
-      const auto seq_length = sequence_length(input[i]);
+    const auto seq_length = sequence_length(input[i]);
 
-      if (!seq_length || i + (seq_length - 1) >= length)
+    if (!seq_length || i + (seq_length - 1) >= length)
+    {
+      return false;
+    }
+
+    switch (seq_length)
+    {
+      case 1:
+        result = static_cast<char32_t>(input[i]);
+        break;
+
+      case 2:
+        result = static_cast<char32_t>(input[i] & 0x1f);
+        break;
+
+      case 3:
+        result = static_cast<char32_t>(input[i] & 0x0f);
+        break;
+
+      case 4:
+        result = static_cast<char32_t>(input[i] & 0x07);
+        break;
+
+      default:
+        return false;
+    }
+
+    for (std::size_t j = 1; j < seq_length; ++j)
+    {
+      if ((input[i + j] & 0xc0) != 0x80)
       {
         return false;
       }
-
-      switch (seq_length)
-      {
-        case 1:
-          result = static_cast<char32_t>(input[i]);
-          break;
-
-        case 2:
-          result = static_cast<char32_t>(input[i] & 0x1f);
-          break;
-
-        case 3:
-          result = static_cast<char32_t>(input[i] & 0x0f);
-          break;
-
-        case 4:
-          result = static_cast<char32_t>(input[i] & 0x07);
-          break;
-
-        default:
-          return false;
-      }
-
-      for (std::size_t j = 1; j < seq_length; ++j)
-      {
-        if ((input[i + j] & 0xc0) != 0x80)
-        {
-          return false;
-        }
-        result = (result << 6) | (input[i + j] & 0x3f);
-      }
-
-      i += seq_length;
-
-      return true;
+      result = (result << 6) | (input[i + j] & 0x3f);
     }
+
+    i += seq_length;
+
+    return true;
   }
 
   /**
    * Decodes given byte sequence into Unicode string using UTF-8 character
    * encoding. Decoding errors are ignored.
    */
-  inline std::u32string decode(const char* input, const std::size_t length)
+  inline std::u32string
+  decode(const char* input, const std::size_t length)
   {
-    std::u32string output;
-
-    for (std::size_t i = 0; i < length;)
-    {
-      char32_t c;
-
-      if (!internal::decode_advance(input, i, length, c))
-      {
-        break;
-      }
-      output.append(1, c);
-    }
-
-    return output;
+    return utils::decode(input, length, decode_advance);
   }
 
   /**
    * Decodes given byte string into Unicode string using UTF-8 character
    * encoding. Decoding errors are ignored.
    */
-  inline std::u32string decode(const std::string& input)
+  inline std::u32string
+  decode(const std::string& input)
   {
-    return decode(input.c_str(), input.length());
+    return utils::decode(
+      input.c_str(),
+      input.length(),
+      decode_advance
+    );
   }
 
   /**
@@ -241,24 +221,19 @@ namespace peelo::unicode::encoding::utf8
    * encoding error is encountered, this function will return false, otherwise
    * it returns true.
    */
-  inline bool encode_validate(
+  inline bool
+  encode_validate(
     const char32_t* input,
     const std::size_t length,
     std::string& output
   )
   {
-    for (std::size_t i = 0; i < length; ++i)
-    {
-      const auto& c = input[i];
-
-      if (!ctype::isvalid(c))
-      {
-        return false;
-      }
-      internal::encode_codepoint(c, output);
-    }
-
-    return true;
+    return utils::encode_validate(
+      input,
+      length,
+      output,
+      encode_codepoint
+    );
   }
 
   /**
@@ -267,9 +242,15 @@ namespace peelo::unicode::encoding::utf8
    * error is encountered, this function will return false, otherwise it
    * returns true.
    */
-  inline bool encode_validate(const std::u32string& input, std::string& output)
+  inline bool
+  encode_validate(const std::u32string& input, std::string& output)
   {
-    return encode_validate(input.c_str(), input.length(), output);
+    return utils::encode_validate(
+      input.c_str(),
+      input.length(),
+      output,
+      encode_codepoint
+    );
   }
 
   /**
@@ -278,24 +259,19 @@ namespace peelo::unicode::encoding::utf8
    * error is encountered, this function will return false, otherwise it
    * returns true.
    */
-  inline bool decode_validate(
+  inline bool
+  decode_validate(
     const char* input,
     const std::size_t length,
     std::u32string& output
   )
   {
-    for (std::size_t i = 0; i < length;)
-    {
-      char32_t c;
-
-      if (!internal::decode_advance(input, i, length, c))
-      {
-        return false;
-      }
-      output.append(1, c);
-    }
-
-    return true;
+    return utils::decode_validate(
+      input,
+      length,
+      output,
+      decode_advance
+    );
   }
 
   /**
@@ -304,10 +280,14 @@ namespace peelo::unicode::encoding::utf8
    * error is encountered, this function will return false, otherwise it
    * returns true.
    */
-  inline bool decode_validate(const std::string& input, std::u32string& output)
+  inline bool
+  decode_validate(const std::string& input, std::u32string& output)
   {
-    return decode_validate(input.c_str(), input.length(), output);
+    return utils::decode_validate(
+      input.c_str(),
+      input.length(),
+      output,
+      decode_advance
+    );
   }
 }
-
-#endif /* !PEELO_UNICODE_ENCODING_UTF8_HPP_GUARD */

@@ -26,17 +26,43 @@
  */
 #pragma once
 
-#include <peelo/unicode/ctype/isalpha.hpp>
-#include <peelo/unicode/ctype/isdigit.hpp>
+#include <array>
+#include <unordered_map>
+#include <utility>
 
-namespace peelo::unicode::ctype
+namespace peelo::unicode::ctype::utils
 {
-  /**
-   * Determines whether the given Unicode code point is alphanumeric.
-   */
+  using range = std::pair<char32_t, char32_t>;
+
+  template<std::size_t Size>
   inline bool
-  isalnum(char32_t c)
+  table_lookup(const std::array<range, Size>& table, char32_t c)
   {
-    return isdigit(c) || isalpha(c);
+    const auto size = table.size();
+
+    for (std::size_t i = 0; i < size; ++i)
+    {
+      const auto& range = table[i];
+
+      if (c >= range.first && c <= range.second)
+      {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  inline char32_t
+  case_lookup(const std::unordered_map<char32_t, char32_t>& map, char32_t c)
+  {
+    const auto i = map.find(c);
+
+    if (i != std::end(map))
+    {
+      return i->second;
+    }
+
+    return c;
   }
 }

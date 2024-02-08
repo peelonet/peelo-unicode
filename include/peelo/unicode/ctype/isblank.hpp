@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,33 +24,25 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISBLANK_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISBLANK_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
   /**
    * Determines whether the given Unicode code point is a blank character.
    */
-  inline bool isblank(char32_t c)
+  inline bool
+  isblank(char32_t c)
   {
-    static const char32_t blank_table[9][2] =
-    {
+    static const std::array<utils::range, 8> blank_table =
+    {{
       { 0x0009, 0x0009 }, { 0x0020, 0x0020 }, { 0x00a0, 0x00a0 },
-      { 0x1680, 0x1680 }, { 0x180e, 0x180e }, { 0x2000, 0x200a },
-      { 0x202f, 0x202f }, { 0x205f, 0x205f }, { 0x3000, 0x3000 }
-    };
+      { 0x1680, 0x1680 }, { 0x2000, 0x200a }, { 0x202f, 0x202f },
+      { 0x205f, 0x205f }, { 0x3000, 0x3000 },
+    }};
 
-    for (int i = 0; i < 9; ++i)
-    {
-      if (c >= blank_table[i][0] && c <= blank_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(blank_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISBLANK_HPP_GUARD */

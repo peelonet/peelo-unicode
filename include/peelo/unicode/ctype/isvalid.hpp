@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,15 +24,15 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISVALID_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISVALID_HPP_GUARD
+#pragma once
 
 namespace peelo::unicode::ctype
 {
   /**
    * Determines whether given Unicode code point is valid or not.
    */
-  inline bool isvalid(char32_t c)
+  inline bool
+  isvalid(char32_t c)
   {
     return !(c > 0x10ffff
       || (c & 0xfffe) == 0xfffe
@@ -40,5 +40,3 @@ namespace peelo::unicode::ctype
       || (c >= 0xfdd0 && c <= 0xfdef));
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISVALID_HPP_GUARD */

@@ -1,35 +1,9 @@
-/*
- * Copyright (c) 2018-2020, peelo.net
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * * Redistributions of source code must retain the above copyright notice,
- *   this list of conditions and the following disclaimer.
- *
- * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
 #include <cassert>
-#include <cstdlib>
 
 #include <peelo/unicode/ctype.hpp>
 
-static void test_isvalid()
+static void
+test_isvalid()
 {
   using peelo::unicode::ctype::isvalid;
 
@@ -41,7 +15,8 @@ static void test_isvalid()
   assert(!isvalid(0xd801));
 }
 
-static void test_isalpha()
+static void
+test_isalpha()
 {
   using peelo::unicode::ctype::isalpha;
 
@@ -55,7 +30,8 @@ static void test_isalpha()
   assert(!isalpha(U'-'));
 }
 
-static void test_isalnum()
+static void
+test_isalnum()
 {
   using peelo::unicode::ctype::isalnum;
 
@@ -70,7 +46,8 @@ static void test_isalnum()
   assert(!isalnum(U'€'));
 }
 
-static void test_isdigit()
+static void
+test_isdigit()
 {
   using peelo::unicode::ctype::isdigit;
 
@@ -92,7 +69,8 @@ static void test_isdigit()
   assert(isdigit(U'᠐'));
 }
 
-static void test_isxdigit()
+static void
+test_isxdigit()
 {
   using peelo::unicode::ctype::isxdigit;
 
@@ -114,7 +92,8 @@ static void test_isxdigit()
   assert(!isxdigit(U'€'));
 }
 
-static void test_isblank()
+static void
+test_isblank()
 {
   using peelo::unicode::ctype::isblank;
 
@@ -127,7 +106,8 @@ static void test_isblank()
   assert(!isblank(U'€'));
 }
 
-static void test_iscntrl()
+static void
+test_iscntrl()
 {
   using peelo::unicode::ctype::iscntrl;
 
@@ -138,7 +118,8 @@ static void test_iscntrl()
   assert(!iscntrl(U' '));
 }
 
-static void test_isgraph()
+static void
+test_isgraph()
 {
   using peelo::unicode::ctype::isgraph;
 
@@ -146,10 +127,11 @@ static void test_isgraph()
   assert(isgraph(U'€'));
 
   assert(!isgraph(U' '));
-  assert(!isgraph(U'\u093b'));
+  assert(!isgraph(0x205f));
 }
 
-static void test_isprint()
+static void
+test_isprint()
 {
   using peelo::unicode::ctype::isprint;
 
@@ -160,7 +142,8 @@ static void test_isprint()
   assert(!isprint(U'\u074c'));
 }
 
-static void test_ispunct()
+static void
+test_ispunct()
 {
   using peelo::unicode::ctype::ispunct;
 
@@ -171,7 +154,8 @@ static void test_ispunct()
   assert(!ispunct(U' '));
 }
 
-static void test_isspace()
+static void
+test_isspace()
 {
   using peelo::unicode::ctype::isspace;
 
@@ -183,7 +167,8 @@ static void test_isspace()
   assert(!isspace(U'-'));
 }
 
-static void test_islower()
+static void
+test_islower()
 {
   using peelo::unicode::ctype::islower;
 
@@ -195,7 +180,8 @@ static void test_islower()
   assert(!islower(U'5'));
 }
 
-static void test_isupper()
+static void
+test_isupper()
 {
   using peelo::unicode::ctype::isupper;
 
@@ -207,7 +193,22 @@ static void test_isupper()
   assert(!isupper(U'5'));
 }
 
-static void test_tolower()
+static void
+test_isemoji()
+{
+  using peelo::unicode::ctype::isemoji;
+
+  assert(isemoji(0x1f642));
+  assert(isemoji(0x1f97b));
+  assert(isemoji(0x1face));
+
+  assert(!isemoji(U'A'));
+  assert(!isemoji(0x20ac));
+  assert(!isemoji(0x2513));
+}
+
+static void
+test_tolower()
 {
   using peelo::unicode::ctype::tolower;
 
@@ -216,7 +217,8 @@ static void test_tolower()
   assert(tolower(U'5') == U'5');
 }
 
-static void test_toupper()
+static void
+test_toupper()
 {
   using peelo::unicode::ctype::toupper;
 
@@ -225,7 +227,8 @@ static void test_toupper()
   assert(toupper(U'5') == U'5');
 }
 
-int main()
+int
+main()
 {
   test_isvalid();
   test_isalpha();
@@ -240,8 +243,7 @@ int main()
   test_isspace();
   test_islower();
   test_isupper();
+  test_isemoji();
   test_tolower();
   test_toupper();
-
-  return EXIT_SUCCESS;
 }

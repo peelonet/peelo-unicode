@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,8 +24,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISXDIGIT_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISXDIGIT_HPP_GUARD
+#pragma once
 
 namespace peelo::unicode::ctype
 {
@@ -33,12 +32,11 @@ namespace peelo::unicode::ctype
    * Determines whether the given Unicode code point is a hexadecimal
    * character.
    */
-  inline bool isxdigit(char32_t c)
+  inline bool
+  isxdigit(char32_t c)
   {
     return (c >= 'A' && c <= 'F')
       || (c >= 'a' && c <= 'f')
       || (c >= '0' && c <= '9');
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISXDIGIT_HPP_GUARD */
