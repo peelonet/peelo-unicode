@@ -26,17 +26,28 @@
  */
 #pragma once
 
-namespace peelo::unicode::ctype
+#include <array>
+#include <utility>
+
+namespace peelo::unicode::ctype::utils
 {
-  /**
-   * Determines whether the given Unicode code point is a hexadecimal
-   * character.
-   */
-  inline bool
-  isxdigit(char32_t c)
+  using range = std::pair<char32_t, char32_t>;
+
+  template<std::size_t Size>
+  inline bool table_lookup(const std::array<range, Size>& table, char32_t c)
   {
-    return (c >= 'A' && c <= 'F')
-      || (c >= 'a' && c <= 'f')
-      || (c >= '0' && c <= '9');
+    const auto size = table.size();
+
+    for (std::size_t i = 0; i < size; ++i)
+    {
+      const auto& range = table[i];
+
+      if (c >= range.first && c <= range.second)
+      {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

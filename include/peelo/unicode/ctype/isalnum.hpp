@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,18 +24,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISALNUM_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISALNUM_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
   /**
    * Determines whether the given Unicode code point is alphanumeric.
    */
-  inline bool isalnum(char32_t c)
+  inline bool
+  isalnum(char32_t c)
   {
-    static const char32_t alnum_table[436][2] =
-    {
+    static const std::array<utils::range, 436> alnum_table =
+    {{
       { 0x0030, 0x0039 }, { 0x0041, 0x005a }, { 0x0061, 0x007a },
       { 0x00aa, 0x00aa }, { 0x00b5, 0x00b5 }, { 0x00ba, 0x00ba },
       { 0x00c0, 0x00d6 }, { 0x00d8, 0x00f6 }, { 0x00f8, 0x0241 },
@@ -182,18 +184,8 @@ namespace peelo::unicode::ctype
       { 0x1d78a, 0x1d7a8 }, { 0x1d7aa, 0x1d7c2 }, { 0x1d7c4, 0x1d7c9 },
       { 0x1d7ce, 0x1d7ff }, { 0x20000, 0x2a6d6 }, { 0x2f800, 0x2fa1d },
       { 0xe0100, 0xe01ef }
-    };
+    }};
 
-    for (int i = 0; i < 436; ++i)
-    {
-      if (c >= alnum_table[i][0] && c <= alnum_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(alnum_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISALNUM_HPP_GUARD */

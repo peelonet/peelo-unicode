@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,13 +24,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_ENCODING_HPP_GUARD
-#define PEELO_UNICODE_ENCODING_HPP_GUARD
+#pragma once
 
-#include <peelo/encoding/utf8.hpp>
-#include <peelo/encoding/utf16be.hpp>
-#include <peelo/encoding/utf16le.hpp>
-#include <peelo/encoding/utf32be.hpp>
-#include <peelo/encoding/utf32le.hpp>
-
-#endif /* !PEELO_UNICODE_ENCODING_HPP_GUARD */
+#include <peelo/unicode/encoding/utf8.hpp>
+#include <peelo/unicode/encoding/utf16be.hpp>
+#include <peelo/unicode/encoding/utf16le.hpp>
+#include <peelo/unicode/encoding/utf32be.hpp>
+#include <peelo/unicode/encoding/utf32le.hpp>

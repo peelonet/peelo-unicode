@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,18 +24,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISDIGIT_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISDIGIT_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
   /**
    * Determines whether the given Unicode code point is a digit.
    */
-  inline bool isdigit(char32_t c)
+  inline bool
+  isdigit(char32_t c)
   {
-    static const char32_t digit_table[23][2] =
-    {
+    static const std::array<utils::range, 23> digit_table =
+    {{
       { 0x0030, 0x0039 }, { 0x0660, 0x0669 }, { 0x06f0, 0x06f9 },
       { 0x0966, 0x096f }, { 0x09e6, 0x09ef }, { 0x0a66, 0x0a6f },
       { 0x0ae6, 0x0aef }, { 0x0b66, 0x0b6f }, { 0x0be6, 0x0bef },
@@ -44,18 +46,8 @@ namespace peelo::unicode::ctype
       { 0x1040, 0x1049 }, { 0x17e0, 0x17e9 }, { 0x1810, 0x1819 },
       { 0x1946, 0x194f }, { 0x19d0, 0x19d9 }, { 0xff10, 0xff19 },
       { 0x104a0, 0x104a9 }, { 0x1d7ce, 0x1d7ff }
-    };
+    }};
 
-    for (int i = 0; i < 23; ++i)
-    {
-      if (c >= digit_table[i][0] && c <= digit_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(digit_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISDIGIT_HPP_GUARD */

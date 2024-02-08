@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,18 +24,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISCNTRL_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISCNTRL_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
   /**
    * Determines whether the given Unicode code point is a control character.
    */
-  inline bool iscntrl(char32_t c)
+  inline bool
+  iscntrl(char32_t c)
   {
-    static const char32_t cntrl_table[19][2] =
-    {
+    static const std::array<utils::range, 19> cntrl_table =
+    {{
       { 0x0000, 0x001f }, { 0x007f, 0x009f }, { 0x00ad, 0x00ad },
       { 0x0600, 0x0603 }, { 0x06dd, 0x06dd }, { 0x070f, 0x070f },
       { 0x17b4, 0x17b5 }, { 0x200b, 0x200f }, { 0x202a, 0x202e },
@@ -43,18 +45,8 @@ namespace peelo::unicode::ctype
       { 0xfeff, 0xfeff }, { 0xfff9, 0xfffb }, { 0x1d173, 0x1d17a },
       { 0xe0001, 0xe0001 }, { 0xe0020, 0xe007f }, { 0xf0000, 0xffffd },
       { 0x100000, 0x10fffd }
-    };
+    }};
 
-    for (int i = 0; i < 19; ++i)
-    {
-      if (c >= cntrl_table[i][0] && c <= cntrl_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(cntrl_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISCNTRL_HPP_GUARD */

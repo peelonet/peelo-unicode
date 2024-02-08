@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,18 +24,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISPRINT_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISPRINT_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
   /**
    * Determines whether the given Unicode code point is a printing character.
    */
-  inline bool isprint(char32_t c)
+  inline bool
+  isprint(char32_t c)
   {
-    static const char32_t print_table[423][2] =
-    {
+    static const std::array<utils::range, 423> print_table =
+    {{
       { 0x0009, 0x000d }, { 0x0020, 0x007e }, { 0x0085, 0x0085 },
       { 0x00a0, 0x0241 }, { 0x0250, 0x036f }, { 0x0374, 0x0375 },
       { 0x037a, 0x037a }, { 0x037e, 0x037e }, { 0x0384, 0x038a },
@@ -177,18 +179,8 @@ namespace peelo::unicode::ctype
       { 0x1d6a8, 0x1d7c9 }, { 0x1d7ce, 0x1d7ff }, { 0x20000, 0x2a6d6 },
       { 0x2f800, 0x2fa1d }, { 0xe0001, 0xe0001 }, { 0xe0020, 0xe007f },
       { 0xe0100, 0xe01ef }, { 0xf0000, 0xffffd }, { 0x100000, 0x10fffd },
-    };
+    }};
 
-    for (int i = 0; i < 423; ++i)
-    {
-      if (c >= print_table[i][0] && c <= print_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(print_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISPRINT_HPP_GUARD */

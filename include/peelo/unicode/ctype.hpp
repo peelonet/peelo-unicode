@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,8 +24,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_HPP_GUARD
+#pragma once
 
 #include <peelo/unicode/ctype/isalnum.hpp>
 #include <peelo/unicode/ctype/isalpha.hpp>
@@ -42,5 +41,3 @@
 #include <peelo/unicode/ctype/isxdigit.hpp>
 #include <peelo/unicode/ctype/tolower.hpp>
 #include <peelo/unicode/ctype/toupper.hpp>
-
-#endif /* !PEELO_UNICODE_CTYPE_HPP_GUARD */

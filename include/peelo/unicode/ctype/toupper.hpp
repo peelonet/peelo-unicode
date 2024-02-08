@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,15 +24,15 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_TOUPPER_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_TOUPPER_HPP_GUARD
+#pragma once
 
 namespace peelo::unicode::ctype
 {
   /**
    * Converts given Unicode code point into uppercase.
    */
-  inline char32_t toupper(char32_t c)
+  inline char32_t
+  toupper(char32_t c)
   {
     if (c >= 'a' && c <= 'z')
     {
@@ -105,5 +105,3 @@ namespace peelo::unicode::ctype
     return c;
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_TOUPPER_HPP_GUARD */

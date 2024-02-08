@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,8 +24,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISPUNCT_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISPUNCT_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
@@ -33,10 +34,11 @@ namespace peelo::unicode::ctype
    * Determines whether the given Unicode code point is a punctuation
    * character.
    */
-  inline bool ispunct(char32_t c)
+  inline bool
+  ispunct(char32_t c)
   {
-    static const char32_t punct_table[96][2] =
-    {
+    static const std::array<utils::range, 96> punct_table =
+    {{
       { 0x0021, 0x0023 }, { 0x0025, 0x002a }, { 0x002c, 0x002f },
       { 0x003a, 0x003b }, { 0x003f, 0x0040 }, { 0x005b, 0x005d },
       { 0x005f, 0x005f }, { 0x007b, 0x007b }, { 0x007d, 0x007d },
@@ -69,18 +71,8 @@ namespace peelo::unicode::ctype
       { 0xff1f, 0xff20 }, { 0xff3b, 0xff3d }, { 0xff3f, 0xff3f },
       { 0xff5b, 0xff5b }, { 0xff5d, 0xff5d }, { 0xff5f, 0xff65 },
       { 0x10100, 0x10101 }, { 0x1039f, 0x1039f }, { 0x10a50, 0x10a58 }
-    };
+    }};
 
-    for (int i = 0; i < 96; ++i)
-    {
-      if (c >= punct_table[i][0] && c <= punct_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(punct_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISPUNCT_HPP_GUARD */

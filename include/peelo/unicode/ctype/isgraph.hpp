@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,8 +24,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISGRAPH_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISGRAPH_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
@@ -33,10 +34,11 @@ namespace peelo::unicode::ctype
    * Determines whether the given Unicode code point is a graphical
    * character.
    */
-  inline bool isgraph(char32_t c)
+  inline bool
+  isgraph(char32_t c)
   {
-    static const char32_t graph_table[424][2] =
-    {
+    static const std::array<utils::range, 424> graph_table =
+    {{
       { 0x0021, 0x007e }, { 0x00a1, 0x0241 }, { 0x0250, 0x036f },
       { 0x0374, 0x0375 }, { 0x037a, 0x037a }, { 0x037e, 0x037e },
       { 0x0384, 0x038a }, { 0x038c, 0x038c }, { 0x038e, 0x03a1 },
@@ -179,18 +181,8 @@ namespace peelo::unicode::ctype
       { 0x20000, 0x2a6d6 }, { 0x2f800, 0x2fa1d }, { 0xe0001, 0xe0001 },
       { 0xe0020, 0xe007f }, { 0xe0100, 0xe01ef }, { 0xf0000, 0xffffd },
       { 0x100000, 0x10fffd },
-    };
+    }};
 
-    for (int i = 0; i < 424; ++i)
-    {
-      if (c >= graph_table[i][0] && c <= graph_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(graph_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISGRAPH_HPP_GUARD */

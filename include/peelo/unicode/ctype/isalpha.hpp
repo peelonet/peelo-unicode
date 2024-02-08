@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,18 +24,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISALPHA_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISALPHA_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
   /**
    * Determines whether the given Unicode code point is alphabetic.
    */
-  inline bool isalpha(char32_t c)
+  inline bool
+  isalpha(char32_t c)
   {
-    static const char32_t alpha_table[418][2] =
-    {
+    static const std::array<utils::range, 418> alpha_table =
+    {{
       { 0x0041, 0x005a }, { 0x0061, 0x007a }, { 0x00aa, 0x00aa },
       { 0x00b5, 0x00b5 }, { 0x00ba, 0x00ba }, { 0x00c0, 0x00d6 },
       { 0x00d8, 0x00f6 }, { 0x00f8, 0x0241 }, { 0x0250, 0x02c1 },
@@ -176,18 +178,8 @@ namespace peelo::unicode::ctype
       { 0x1d770, 0x1d788 }, { 0x1d78a, 0x1d7a8 }, { 0x1d7aa, 0x1d7c2 },
       { 0x1d7c4, 0x1d7c9 }, { 0x20000, 0x2a6d6 }, { 0x2f800, 0x2fa1d },
       { 0xe0100, 0xe01ef }
-    };
+    }};
 
-    for (int i = 0; i < 418; ++i)
-    {
-      if (c >= alpha_table[i][0] && c <= alpha_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(alpha_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISALPHA_HPP_GUARD */

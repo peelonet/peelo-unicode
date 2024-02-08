@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,8 +24,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISUPPER_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISUPPER_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
@@ -33,10 +34,11 @@ namespace peelo::unicode::ctype
    * Determines whether the given Unicode code point is an uppercase
    * character.
    */
-  inline bool isupper(char32_t c)
+  inline bool
+  isupper(char32_t c)
   {
-    static const char32_t upper_table[476][2] =
-    {
+    static const std::array<utils::range, 476> upper_table =
+    {{
       { 0x0041, 0x005a }, { 0x00c0, 0x00d6 }, { 0x00d8, 0x00de },
       { 0x0100, 0x0100 }, { 0x0102, 0x0102 }, { 0x0104, 0x0104 },
       { 0x0106, 0x0106 }, { 0x0108, 0x0108 }, { 0x010a, 0x010a },
@@ -196,18 +198,8 @@ namespace peelo::unicode::ctype
       { 0x1d608, 0x1d621 }, { 0x1d63c, 0x1d655 }, { 0x1d670, 0x1d689 },
       { 0x1d6a8, 0x1d6c0 }, { 0x1d6e2, 0x1d6fa }, { 0x1d71c, 0x1d734 },
       { 0x1d756, 0x1d76e }, { 0x1d790, 0x1d7a8 }
-    };
+    }};
 
-    for (int i = 0; i < 476; ++i)
-    {
-      if (c >= upper_table[i][0] && c <= upper_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(upper_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISUPPER_HPP_GUARD */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,36 +24,28 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISSPACE_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISSPACE_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
   /**
    * Determines whether the given Unicode code point is a space character.
    */
-  inline bool isspace(char32_t c)
+  inline bool
+  isspace(char32_t c)
   {
-    static const char32_t space_table[11][2] =
-    {
+    static const std::array<utils::range, 11> space_table =
+    {{
       { 0x0009, 0x000d }, { 0x0020, 0x0020 },
       { 0x0085, 0x0085 }, { 0x00a0, 0x00a0 },
       { 0x1680, 0x1680 }, { 0x180e, 0x180e },
       { 0x2000, 0x200a }, { 0x2028, 0x2029 },
       { 0x202f, 0x202f }, { 0x205f, 0x205f },
       { 0x3000, 0x3000 }
-    };
+    }};
 
-    for (int i = 0; i < 11; ++i)
-    {
-      if (c >= space_table[i][0] && c <= space_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(space_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISSPACE_HPP_GUARD */

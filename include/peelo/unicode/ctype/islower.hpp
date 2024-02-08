@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020, peelo.net
+ * Copyright (c) 2018-2024, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,18 +24,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef PEELO_UNICODE_CTYPE_ISLOWER_HPP_GUARD
-#define PEELO_UNICODE_CTYPE_ISLOWER_HPP_GUARD
+#pragma once
+
+#include <peelo/unicode/ctype/_utils.hpp>
 
 namespace peelo::unicode::ctype
 {
   /**
    * Determines whether the given Unicode code point is lowercase.
    */
-  inline bool islower(char32_t c)
+  inline bool
+  islower(char32_t c)
   {
-    static const char32_t lower_table[480][2] =
-    {
+    static const std::array<utils::range, 480> lower_table =
+    {{
       { 0x0061, 0x007a }, { 0x00aa, 0x00aa }, { 0x00b5, 0x00b5 },
       { 0x00ba, 0x00ba }, { 0x00df, 0x00f6 }, { 0x00f8, 0x00ff },
       { 0x0101, 0x0101 }, { 0x0103, 0x0103 }, { 0x0105, 0x0105 },
@@ -196,18 +198,8 @@ namespace peelo::unicode::ctype
       { 0x1d6dc, 0x1d6e1 }, { 0x1d6fc, 0x1d714 }, { 0x1d716, 0x1d71b },
       { 0x1d736, 0x1d74e }, { 0x1d750, 0x1d755 }, { 0x1d770, 0x1d788 },
       { 0x1d78a, 0x1d78f }, { 0x1d7aa, 0x1d7c2 }, { 0x1d7c4, 0x1d7c9 }
-    };
+    }};
 
-    for (int i = 0; i < 480; ++i)
-    {
-      if (c >= lower_table[i][0] && c <= lower_table[i][1])
-      {
-        return true;
-      }
-    }
-
-    return false;
+    return utils::table_lookup(lower_table, c);
   }
 }
-
-#endif /* !PEELO_UNICODE_CTYPE_ISLOWER_HPP_GUARD */
