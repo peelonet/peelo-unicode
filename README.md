@@ -28,10 +28,14 @@ following functions inside `peelo::unicode::ctype` namespace:
 - `isxdigit()`
 - `tolower()`
 - `toupper()`
-- And additional `isvalid()` function which tests whether given value is valid
-  Unicode codepoint.
+
+Additional functions not found in `ctype.h` are:
+
+- `isvalid()` - Tests whether given value is valid Unicode codepoint.
+- `isemoji()` - Tests whether given Unicode codepoint is an [emoji].
 
 [ctype.h]: https://en.cppreference.com/w/cpp/header/cctype
+[emoji]: https://en.wikipedia.org/wiki/Emoji
 
 ### Example
 

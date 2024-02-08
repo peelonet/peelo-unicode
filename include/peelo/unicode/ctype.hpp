@@ -31,6 +31,7 @@
 #include <peelo/unicode/ctype/isblank.hpp>
 #include <peelo/unicode/ctype/iscntrl.hpp>
 #include <peelo/unicode/ctype/isdigit.hpp>
+#include <peelo/unicode/ctype/isemoji.hpp>
 #include <peelo/unicode/ctype/isgraph.hpp>
 #include <peelo/unicode/ctype/islower.hpp>
 #include <peelo/unicode/ctype/isprint.hpp>

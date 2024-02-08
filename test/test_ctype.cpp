@@ -194,6 +194,20 @@ test_isupper()
 }
 
 static void
+test_isemoji()
+{
+  using peelo::unicode::ctype::isemoji;
+
+  assert(isemoji(0x1f642));
+  assert(isemoji(0x1f97b));
+  assert(isemoji(0x1face));
+
+  assert(!isemoji(U'A'));
+  assert(!isemoji(0x20ac));
+  assert(!isemoji(0x2513));
+}
+
+static void
 test_tolower()
 {
   using peelo::unicode::ctype::tolower;
@@ -229,6 +243,7 @@ main()
   test_isspace();
   test_islower();
   test_isupper();
+  test_isemoji();
   test_tolower();
   test_toupper();
 }
