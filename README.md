@@ -112,3 +112,63 @@ main()
   }
 }
 ```
+
+## BOM detection
+
+The library provides function for detecting whether an byte string contains
+[byte order mark] or not, and which character encoding it is. Even though use
+of BOM is rare these days, it might sometimes be useful to able to detect it.
+
+List of detected character encodings are:
+
+- [UTF-8]
+- [UTF-16BE][UTF-16]
+- [UTF-16LE][UTF-16]
+- [UTF-32BE][UTF-32]
+- [UTF-32LE][UTF-32]
+- [UTF-7]
+- [UTF-1]
+- [UTF-EBCDIC]
+- [SCSU]
+- [BOCU-1]
+- [GB18030]
+
+[Byte order mark]: https://en.wikipedia.org/wiki/Byte_order_mark
+[UTF-7]: https://en.wikipedia.org/wiki/UTF-7
+[UTF-1]: https://en.wikipedia.org/wiki/UTF-1
+[UTF-EBCDIC]: https://en.wikipedia.org/wiki/UTF-EBCDIC
+[SCSU]: https://en.wikipedia.org/wiki/Standard_Compression_Scheme_for_Unicode
+[BOCU-1]: https://en.wikipedia.org/wiki/Binary_Ordered_Compression_for_Unicode
+[GB18030]: https://en.wikipedia.org/wiki/GB_18030
+
+### Example
+
+```cpp
+#include <fstream>
+#include <iostream>
+#include <peelo/unicode/bom.hpp>
+
+int
+main()
+{
+  char buffer[1024];
+  std::fstream f("file.txt");
+  std::size_t length;
+
+  f.read(buffer, sizeof(buffer));
+  length = f.gcount();
+  f.close();
+
+  if (const auto bom = peelo::unicode::detect_bom(buffer, length))
+  {
+    if (*bom == peelo::unicode::bom::utf16_be)
+    {
+      std::cout << "File has UTF-16BE BOM." << std::endl;
+    } else {
+      std::cout << "File has some other BOM." << std::endl;
+    }
+  } else {
+    std::cout << "File does not contain BOM." << std::endl;
+  }
+}
+```
