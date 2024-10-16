@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
 
 PROJECT(
   PeeloUnicode
-  VERSION 1.1.0
+  VERSION 2.0.0
   DESCRIPTION "Header only C++ Unicode utilities."
   HOMEPAGE_URL "https://github.com/peelonet/peelo-unicode"
   LANGUAGES CXX

@@ -31,12 +31,12 @@
 #include <optional>
 #include <string>
 
-namespace peelo::unicode
+namespace peelo::unicode::bom
 {
   /**
    * Enumeration of different recognized BOM types.
    */
-  enum class bom
+  enum class type
   {
     utf8,
     utf16_be,
@@ -59,14 +59,14 @@ namespace peelo::unicode
    * @return Byte order mark detected in the given byte string, or null option
    *         if the given byte string does not contain byte order mark.
    */
-  inline std::optional<bom>
-  detect_bom(const char* input, std::size_t length)
+  inline std::optional<type>
+  detect(const char* input, std::size_t length)
   {
     struct bom_info
     {
       const char* bytes;
       std::size_t length;
-      bom type;
+      enum type type;
     };
     static constexpr std::size_t bom_array_size = 11;
     static const std::array<bom_info, bom_array_size> bom_array =
@@ -74,57 +74,57 @@ namespace peelo::unicode
       {
         "\xef\xbb\xbf",
         3,
-        bom::utf8,
+        type::utf8,
       },
       {
         "\0\0\xfe\xff",
         4,
-        bom::utf32_be,
+        type::utf32_be,
       },
       {
         "\xff\xfe\0\0",
         4,
-        bom::utf32_le,
+        type::utf32_le,
       },
       {
         "\xfe\xff",
         2,
-        bom::utf16_be,
+        type::utf16_be,
       },
       {
         "\xff\xfe",
         2,
-        bom::utf16_le,
+        type::utf16_le,
       },
       {
         "\x2b\x2f\x76",
         3,
-        bom::utf7,
+        type::utf7,
       },
       {
         "\xf7\x64\x4c",
         3,
-        bom::utf1,
+        type::utf1,
       },
       {
         "\xdd\x73\x66\x73",
         4,
-        bom::utf_ebcdic
+        type::utf_ebcdic
       },
       {
         "\x0e\xfe\xff",
         3,
-        bom::scsu
+        type::scsu
       },
       {
         "\xfb\xee\x28",
         3,
-        bom::bocu_1
+        type::bocu_1
       },
       {
         "\x84\x31\x95\x33",
         4,
-        bom::gb18030
+        type::gb18030
       },
     }};
 
@@ -152,9 +152,9 @@ namespace peelo::unicode
    * @return Byte order mark detected in the given byte string, or null option
    *         if the given byte string does not contain byte order mark.
    */
-  inline std::optional<bom>
-  detect_bom(const std::string& input)
+  inline std::optional<type>
+  detect(const std::string& input)
   {
-    return detect_bom(input.c_str(), input.length());
+    return detect(input.c_str(), input.length());
   }
 }

@@ -159,9 +159,9 @@ main()
   length = f.gcount();
   f.close();
 
-  if (const auto bom = peelo::unicode::detect_bom(buffer, length))
+  if (const auto bom = peelo::unicode::bom::detect(buffer, length))
   {
-    if (*bom == peelo::unicode::bom::utf16_be)
+    if (*bom == peelo::unicode::bom::type::utf16_be)
     {
       std::cout << "File has UTF-16BE BOM." << std::endl;
     } else {
