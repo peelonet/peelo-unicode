@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
 
 PROJECT(
   PeeloUnicode
-  VERSION 2.0.0
+  VERSION 2.1.0
   DESCRIPTION "Header only C++ Unicode utilities."
   HOMEPAGE_URL "https://github.com/peelonet/peelo-unicode"
   LANGUAGES CXX
@@ -64,14 +64,14 @@ INSTALL(
     ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake
 )
 
-INSTALL(
-  DIRECTORY
-    ${PROJECT_SOURCE_DIR}/include/peelo
-  DESTINATION
-    include
-)
-
 IF(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+  INSTALL(
+    DIRECTORY
+      ${PROJECT_SOURCE_DIR}/include/peelo
+    DESTINATION
+      include
+  )
+
   ENABLE_TESTING()
   ADD_SUBDIRECTORY(test)
 ENDIF()
