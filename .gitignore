@@ -1,5 +1,7 @@
 /.vscode
 /build
 /doxygen
+*.pyc
 *.o
 *.swp
+__pycache__
