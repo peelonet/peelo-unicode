@@ -72,10 +72,12 @@ Supported character encodings are:
 - [UTF-16LE][UTF-16]
 - [UTF-32BE][UTF-32]
 - [UTF-32LE][UTF-32]
+- [GB 18030]
 
 [UTF-8]: https://en.wikipedia.org/wiki/UTF-8
 [UTF-16]: https://en.wikipedia.org/wiki/UTF-16
 [UTF-32]: https://en.wikipedia.org/wiki/UTF-32
+[GB 18030]: https://en.wikipedia.org/wiki/GB_18030
 
 ### Example
 
