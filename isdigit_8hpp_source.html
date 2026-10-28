@@ -61,7 +61,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <a href="isdigit_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Copyright (c) 2018-2024, peelo.net</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Copyright (c) 2018-2026, peelo.net</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -96,36 +96,38 @@ $(function(){ initResizable(false); });
 <div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="namespacepeelo_1_1unicode_1_1ctype.html#a79ff9127295c3825a5af8a1765944452">   37</a></span>  <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1ctype.html#a79ff9127295c3825a5af8a1765944452">isdigit</a>(<span class="keywordtype">char32_t</span> c)</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static</span> <span class="keyword">const</span> std::array&lt;utils::range, 64&gt; digit_table =</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static</span> <span class="keyword">const</span> std::array&lt;utils::range, 72&gt; digit_table =</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    {{</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      { 0x0030, 0x0039 }, { 0x0660, 0x0669 }, { 0x06F0, 0x06F9 },</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      { 0x07C0, 0x07C9 }, { 0x0966, 0x096F }, { 0x09E6, 0x09EF },</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      { 0x0A66, 0x0A6F }, { 0x0AE6, 0x0AEF }, { 0x0B66, 0x0B6F },</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      { 0x0BE6, 0x0BEF }, { 0x0C66, 0x0C6F }, { 0x0CE6, 0x0CEF },</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      { 0x0D66, 0x0D6F }, { 0x0DE6, 0x0DEF }, { 0x0E50, 0x0E59 },</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      { 0x0ED0, 0x0ED9 }, { 0x0F20, 0x0F29 }, { 0x1040, 0x1049 },</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      { 0x1090, 0x1099 }, { 0x17E0, 0x17E9 }, { 0x1810, 0x1819 },</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      { 0x1946, 0x194F }, { 0x19D0, 0x19D9 }, { 0x1A80, 0x1A89 },</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      { 0x1A90, 0x1A99 }, { 0x1B50, 0x1B59 }, { 0x1BB0, 0x1BB9 },</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      { 0x1C40, 0x1C49 }, { 0x1C50, 0x1C59 }, { 0xA620, 0xA629 },</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      { 0xA8D0, 0xA8D9 }, { 0xA900, 0xA909 }, { 0xA9D0, 0xA9D9 },</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      { 0xA9F0, 0xA9F9 }, { 0xAA50, 0xAA59 }, { 0xABF0, 0xABF9 },</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      { 0xFF10, 0xFF19 }, { 0x104A0, 0x104A9 }, { 0x10D30, 0x10D39 },</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      { 0x11066, 0x1106F }, { 0x110F0, 0x110F9 }, { 0x11136, 0x1113F },</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      { 0x111D0, 0x111D9 }, { 0x112F0, 0x112F9 }, { 0x11450, 0x11459 },</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      { 0x114D0, 0x114D9 }, { 0x11650, 0x11659 }, { 0x116C0, 0x116C9 },</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      { 0x11730, 0x11739 }, { 0x118E0, 0x118E9 }, { 0x11950, 0x11959 },</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      { 0x11C50, 0x11C59 }, { 0x11D50, 0x11D59 }, { 0x11DA0, 0x11DA9 },</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      { 0x11F50, 0x11F59 }, { 0x16A60, 0x16A69 }, { 0x16AC0, 0x16AC9 },</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      { 0x16B50, 0x16B59 }, { 0x1D7CE, 0x1D7FF }, { 0x1E140, 0x1E149 },</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      { 0x1E2F0, 0x1E2F9 }, { 0x1E4F0, 0x1E4F9 }, { 0x1E950, 0x1E959 },</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      { 0x1FBF0, 0x1FBF9 },</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }};</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> utils::table_lookup(digit_table, c);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      { 0x0030, 0x0039, }, { 0x0660, 0x0669, }, { 0x06f0, 0x06f9, },</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      { 0x07c0, 0x07c9, }, { 0x0966, 0x096f, }, { 0x09e6, 0x09ef, },</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      { 0x0a66, 0x0a6f, }, { 0x0ae6, 0x0aef, }, { 0x0b66, 0x0b6f, },</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      { 0x0be6, 0x0bef, }, { 0x0c66, 0x0c6f, }, { 0x0ce6, 0x0cef, },</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      { 0x0d66, 0x0d6f, }, { 0x0de6, 0x0def, }, { 0x0e50, 0x0e59, },</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      { 0x0ed0, 0x0ed9, }, { 0x0f20, 0x0f29, }, { 0x1040, 0x1049, },</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      { 0x1090, 0x1099, }, { 0x17e0, 0x17e9, }, { 0x1810, 0x1819, },</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      { 0x1946, 0x194f, }, { 0x19d0, 0x19d9, }, { 0x1a80, 0x1a89, },</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      { 0x1a90, 0x1a99, }, { 0x1b50, 0x1b59, }, { 0x1bb0, 0x1bb9, },</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      { 0x1c40, 0x1c49, }, { 0x1c50, 0x1c59, }, { 0xa620, 0xa629, },</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      { 0xa8d0, 0xa8d9, }, { 0xa900, 0xa909, }, { 0xa9d0, 0xa9d9, },</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      { 0xa9f0, 0xa9f9, }, { 0xaa50, 0xaa59, }, { 0xabf0, 0xabf9, },</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      { 0xff10, 0xff19, }, { 0x104a0, 0x104a9, }, { 0x10d30, 0x10d39, },</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      { 0x10d40, 0x10d49, }, { 0x11066, 0x1106f, }, { 0x110f0, 0x110f9, },</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      { 0x11136, 0x1113f, }, { 0x111d0, 0x111d9, }, { 0x112f0, 0x112f9, },</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      { 0x11450, 0x11459, }, { 0x114d0, 0x114d9, }, { 0x11650, 0x11659, },</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      { 0x116c0, 0x116c9, }, { 0x116d0, 0x116e3, }, { 0x11730, 0x11739, },</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      { 0x118e0, 0x118e9, }, { 0x11950, 0x11959, }, { 0x11bf0, 0x11bf9, },</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      { 0x11c50, 0x11c59, }, { 0x11d50, 0x11d59, }, { 0x11da0, 0x11da9, },</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      { 0x11de0, 0x11de9, }, { 0x11f50, 0x11f59, }, { 0x16130, 0x16139, },</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      { 0x16a60, 0x16a69, }, { 0x16ac0, 0x16ac9, }, { 0x16b50, 0x16b59, },</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      { 0x16d70, 0x16d79, }, { 0x1ccf0, 0x1ccf9, }, { 0x1d7ce, 0x1d7ff, },</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      { 0x1e140, 0x1e149, }, { 0x1e2f0, 0x1e2f9, }, { 0x1e4f0, 0x1e4f9, },</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      { 0x1e5f1, 0x1e5fa, }, { 0x1e950, 0x1e959, }, { 0x1fbf0, 0x1fbf9, },</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }};</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">return</span> utils::table_lookup(digit_table, c);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  }</div>
 </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>}</div>
 <div class="ttc" id="actype_2__utils_8hpp_html"><div class="ttname"><a href="ctype_2__utils_8hpp.html">_utils.hpp</a></div></div>
 <div class="ttc" id="anamespacepeelo_1_1unicode_1_1ctype_html"><div class="ttname"><a href="namespacepeelo_1_1unicode_1_1ctype.html">peelo::unicode::ctype</a></div><div class="ttdef"><b>Definition</b> _utils.hpp:34</div></div>
 <div class="ttc" id="anamespacepeelo_1_1unicode_1_1ctype_html_a79ff9127295c3825a5af8a1765944452"><div class="ttname"><a href="namespacepeelo_1_1unicode_1_1ctype.html#a79ff9127295c3825a5af8a1765944452">peelo::unicode::ctype::isdigit</a></div><div class="ttdeci">bool isdigit(char32_t c)</div><div class="ttdef"><b>Definition</b> isdigit.hpp:37</div></div>

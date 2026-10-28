@@ -61,7 +61,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <a href="isblank_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Copyright (c) 2018-2024, peelo.net</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Copyright (c) 2018-2026, peelo.net</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -98,9 +98,9 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  {</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static</span> <span class="keyword">const</span> std::array&lt;utils::range, 8&gt; blank_table =</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    {{</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      { 0x0009, 0x0009 }, { 0x0020, 0x0020 }, { 0x00a0, 0x00a0 },</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      { 0x1680, 0x1680 }, { 0x2000, 0x200a }, { 0x202f, 0x202f },</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      { 0x205f, 0x205f }, { 0x3000, 0x3000 },</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      { 0x0009, 0x0009, }, { 0x0020, 0x0020, }, { 0x00a0, 0x00a0, },</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      { 0x1680, 0x1680, }, { 0x2000, 0x200a, }, { 0x202f, 0x202f, },</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      { 0x205f, 0x205f, }, { 0x3000, 0x3000, },</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }};</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">return</span> utils::table_lookup(blank_table, c);</div>

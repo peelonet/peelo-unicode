@@ -96,8 +96,7 @@ $(function(){ initResizable(false); });
 <div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic.html">   34</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic.html">peelo::unicode::encoding::utf_ebcdic</a></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>{</div>
-<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html">   36</a></span>  <span class="keyword">namespace </span>internal</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keyword">namespace </span>internal</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  {</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">// UTR #16 Table 2: I8-sequence byte -&gt; UTF-EBCDIC byte</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> std::array&lt;unsigned char, 256&gt; i8_to_ebcdic = {{</div>
@@ -172,22 +171,19 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }};</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span></div>
-<div class="foldopen" id="foldopen00111" data-start="{" data-end="}">
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#ad158c5182e51494c70e8797435aee787">  111</a></span>    <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#ad158c5182e51494c70e8797435aee787">is_i8_trailing</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <span class="keywordtype">byte</span>)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    is_i8_trailing(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <span class="keywordtype">byte</span>)</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    {</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="keywordflow">return</span> (<span class="keywordtype">byte</span> &amp; 0xe0) == 0xa0;</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
-</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keyword">inline</span> std::size_t</div>
-<div class="foldopen" id="foldopen00117" data-start="{" data-end="}">
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#aa6a9ae3cf68bbb3aa7359c4737c73236">  117</a></span>    <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#aa6a9ae3cf68bbb3aa7359c4737c73236">i8_sequence_length</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> lead)</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    i8_sequence_length(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> lead)</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    {</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>      <span class="keywordflow">if</span> (lead &lt;= 0x9f)</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      {</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">return</span> 1;</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      }</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#ad158c5182e51494c70e8797435aee787">is_i8_trailing</a>(lead))</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (is_i8_trailing(lead))</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>      {</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      }</div>
@@ -211,23 +207,19 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>      <span class="comment">// 6- and 7-byte forms exist for UCS-4 beyond Unicode; reject them.</span></div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>      <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
-</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span></div>
-<div class="foldopen" id="foldopen00149" data-start="{" data-end="}">
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">  149</a></span>    <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">append_mapped</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> i8_byte, std::string&amp; output)</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    append_mapped(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> i8_byte, std::string&amp; output)</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    {</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>      output.append(1, <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(i8_to_ebcdic[i8_byte]));</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    }</div>
-</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  }</div>
-</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keyword">inline</span> std::size_t</div>
 <div class="foldopen" id="foldopen00161" data-start="{" data-end="}">
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic.html#adeac1286c50ea6e68ed5abe5dd52633d">  161</a></span>  <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic.html#adeac1286c50ea6e68ed5abe5dd52633d">sequence_length</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <span class="keywordtype">byte</span>)</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  {</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#aa6a9ae3cf68bbb3aa7359c4737c73236">internal::i8_sequence_length</a>(internal::ebcdic_to_i8[<span class="keywordtype">byte</span>]);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">return</span> internal::i8_sequence_length(internal::ebcdic_to_i8[<span class="keywordtype">byte</span>]);</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  }</div>
 </div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
@@ -266,72 +258,72 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  {</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordflow">if</span> (c &lt;= 0x9f)</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    {</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(c), output);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>      internal::append_mapped(<span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(c), output);</div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (c &lt;= 0x3ff)</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    {</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xc0 | (c &gt;&gt; 5)),</div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        output</div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>      );</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xa0 | (c &amp; 0x1f)),</div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        output</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>      );</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    }</div>
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (c &lt;= 0x3fff)</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    {</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xe0 | (c &gt;&gt; 10)),</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        output</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      );</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xa0 | ((c &gt;&gt; 5) &amp; 0x1f)),</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        output</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>      );</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xa0 | (c &amp; 0x1f)),</div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        output</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>      );</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    }</div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (c &lt;= 0x3ffff)</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    {</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xf0 | (c &gt;&gt; 15)),</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        output</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>      );</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xa0 | ((c &gt;&gt; 10) &amp; 0x1f)),</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        output</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      );</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xa0 | ((c &gt;&gt; 5) &amp; 0x1f)),</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        output</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>      );</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xa0 | (c &amp; 0x1f)),</div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        output</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>      );</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    }</div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    {</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xf8 | (c &gt;&gt; 20)),</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        output</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>      );</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xa0 | ((c &gt;&gt; 15) &amp; 0x1f)),</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        output</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      );</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xa0 | ((c &gt;&gt; 10) &amp; 0x1f)),</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        output</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>      );</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xa0 | ((c &gt;&gt; 5) &amp; 0x1f)),</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        output</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>      );</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>      <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">internal::append_mapped</a>(</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>      internal::append_mapped(</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(0xa0 | (c &amp; 0x1f)),</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        output</div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      );</div>
@@ -376,7 +368,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    <span class="keyword">const</span> <span class="keyword">auto</span> lead_i8 = internal::ebcdic_to_i8[</div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>      <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(input[i])</div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    ];</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <span class="keyword">const</span> <span class="keyword">auto</span> seq_length = <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#aa6a9ae3cf68bbb3aa7359c4737c73236">internal::i8_sequence_length</a>(lead_i8);</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <span class="keyword">const</span> <span class="keyword">auto</span> seq_length = internal::i8_sequence_length(lead_i8);</div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    <span class="keywordflow">if</span> (!seq_length || i + seq_length &gt; length)</div>
 <div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    {</div>
@@ -399,7 +391,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>      i8_bytes[j] = internal::ebcdic_to_i8[</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(input[i + j])</div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>      ];</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>      <span class="keywordflow">if</span> (!<a class="code hl_function" href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#ad158c5182e51494c70e8797435aee787">internal::is_i8_trailing</a>(i8_bytes[j]))</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>      <span class="keywordflow">if</span> (!internal::is_i8_trailing(i8_bytes[j]))</div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>      {</div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        ++i;</div>
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -530,9 +522,6 @@ $(function(){ initResizable(false); });
 </div>
 <div class="ttc" id="aencoding_2__utils_8hpp_html"><div class="ttname"><a href="encoding_2__utils_8hpp.html">_utils.hpp</a></div></div>
 <div class="ttc" id="anamespacepeelo_1_1unicode_1_1ctype_html_a6b0b9c9022d048c6a74e0102d75a1e39"><div class="ttname"><a href="namespacepeelo_1_1unicode_1_1ctype.html#a6b0b9c9022d048c6a74e0102d75a1e39">peelo::unicode::ctype::isvalid</a></div><div class="ttdeci">bool isvalid(char32_t c)</div><div class="ttdef"><b>Definition</b> isvalid.hpp:35</div></div>
-<div class="ttc" id="anamespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal_html_a7b21bf4ab2e8ed211309159dbdba8865"><div class="ttname"><a href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#a7b21bf4ab2e8ed211309159dbdba8865">peelo::unicode::encoding::utf_ebcdic::internal::append_mapped</a></div><div class="ttdeci">void append_mapped(unsigned char i8_byte, std::string &amp;output)</div><div class="ttdef"><b>Definition</b> utf_ebcdic.hpp:149</div></div>
-<div class="ttc" id="anamespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal_html_aa6a9ae3cf68bbb3aa7359c4737c73236"><div class="ttname"><a href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#aa6a9ae3cf68bbb3aa7359c4737c73236">peelo::unicode::encoding::utf_ebcdic::internal::i8_sequence_length</a></div><div class="ttdeci">std::size_t i8_sequence_length(unsigned char lead)</div><div class="ttdef"><b>Definition</b> utf_ebcdic.hpp:117</div></div>
-<div class="ttc" id="anamespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal_html_ad158c5182e51494c70e8797435aee787"><div class="ttname"><a href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_1_1internal.html#ad158c5182e51494c70e8797435aee787">peelo::unicode::encoding::utf_ebcdic::internal::is_i8_trailing</a></div><div class="ttdeci">bool is_i8_trailing(unsigned char byte)</div><div class="ttdef"><b>Definition</b> utf_ebcdic.hpp:111</div></div>
 <div class="ttc" id="anamespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_html"><div class="ttname"><a href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic.html">peelo::unicode::encoding::utf_ebcdic</a></div><div class="ttdef"><b>Definition</b> utf_ebcdic.hpp:35</div></div>
 <div class="ttc" id="anamespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_html_a1b8553bcccf39bd7a1e5db85a3bb2764"><div class="ttname"><a href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic.html#a1b8553bcccf39bd7a1e5db85a3bb2764">peelo::unicode::encoding::utf_ebcdic::decode_validate</a></div><div class="ttdeci">bool decode_validate(const char *input, const std::size_t length, std::u32string &amp;output)</div><div class="ttdef"><b>Definition</b> utf_ebcdic.hpp:459</div></div>
 <div class="ttc" id="anamespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic_html_a3fe37bd207e56a957ecaf1f8093f52fa"><div class="ttname"><a href="namespacepeelo_1_1unicode_1_1encoding_1_1utf__ebcdic.html#a3fe37bd207e56a957ecaf1f8093f52fa">peelo::unicode::encoding::utf_ebcdic::encode</a></div><div class="ttdeci">std::string encode(const char32_t *input, std::size_t length)</div><div class="ttdef"><b>Definition</b> utf_ebcdic.hpp:280</div></div>

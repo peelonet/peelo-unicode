@@ -61,7 +61,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <a href="isspace_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Copyright (c) 2018-2024, peelo.net</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * Copyright (c) 2018-2026, peelo.net</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * All rights reserved.</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Redistribution and use in source and binary forms, with or without</span></div>
@@ -96,12 +96,12 @@ $(function(){ initResizable(false); });
 <div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="namespacepeelo_1_1unicode_1_1ctype.html#ae7ec4c962a549adce3b5349b5e870e00">   37</a></span>  <a class="code hl_function" href="namespacepeelo_1_1unicode_1_1ctype.html#ae7ec4c962a549adce3b5349b5e870e00">isspace</a>(<span class="keywordtype">char32_t</span> c)</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static</span> <span class="keyword">const</span> std::array&lt;utils::range, 11&gt; space_table =</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static</span> <span class="keyword">const</span> std::array&lt;utils::range, 10&gt; space_table =</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    {{</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      { 0x0009, 0x000D }, { 0x0020, 0x0020 }, { 0x0085, 0x0085 },</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      { 0x00A0, 0x00A0 }, { 0x1680, 0x1680 }, { 0x2000, 0x200A },</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      { 0x2028, 0x2028 }, { 0x2029, 0x2029 }, { 0x202F, 0x202F },</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      { 0x205F, 0x205F }, { 0x3000, 0x3000 },</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      { 0x0009, 0x000d, }, { 0x0020, 0x0020, }, { 0x0085, 0x0085, },</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      { 0x00a0, 0x00a0, }, { 0x1680, 0x1680, }, { 0x2000, 0x200a, },</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      { 0x2028, 0x2029, }, { 0x202f, 0x202f, }, { 0x205f, 0x205f, },</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      { 0x3000, 0x3000, },</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }};</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">return</span> utils::table_lookup(space_table, c);</div>
