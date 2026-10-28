@@ -34,3 +34,4 @@
 #include <peelo/unicode/encoding/utf32le.hpp>
 #include <peelo/unicode/encoding/utf7.hpp>
 #include <peelo/unicode/encoding/utf8.hpp>
+#include <peelo/unicode/encoding/utf_ebcdic.hpp>

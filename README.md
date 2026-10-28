@@ -70,6 +70,7 @@ Supported character encodings are:
 - [UTF-8]
 - [UTF-7]
 - [UTF-1]
+- [UTF-EBCDIC]
 - [UTF-16BE][UTF-16]
 - [UTF-16LE][UTF-16]
 - [UTF-32BE][UTF-32]
@@ -79,6 +80,7 @@ Supported character encodings are:
 [UTF-8]: https://en.wikipedia.org/wiki/UTF-8
 [UTF-7]: https://en.wikipedia.org/wiki/UTF-7
 [UTF-1]: https://en.wikipedia.org/wiki/UTF-1
+[UTF-EBCDIC]: https://en.wikipedia.org/wiki/UTF-EBCDIC
 [UTF-16]: https://en.wikipedia.org/wiki/UTF-16
 [UTF-32]: https://en.wikipedia.org/wiki/UTF-32
 [GB 18030]: https://en.wikipedia.org/wiki/GB_18030
@@ -140,7 +142,6 @@ List of detected character encodings are:
 - [GB18030]
 
 [Byte order mark]: https://en.wikipedia.org/wiki/Byte_order_mark
-[UTF-EBCDIC]: https://en.wikipedia.org/wiki/UTF-EBCDIC
 [SCSU]: https://en.wikipedia.org/wiki/Standard_Compression_Scheme_for_Unicode
 [BOCU-1]: https://en.wikipedia.org/wiki/Binary_Ordered_Compression_for_Unicode
 [GB18030]: https://en.wikipedia.org/wiki/GB_18030
