@@ -10,9 +10,20 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
-      - name: Build
-        uses: ashutoshvarma/action-cmake-build@master
+
+      - name: Cache CMake dependencies
+        uses: actions/cache@v4
         with:
-          build-dir: ${{ runner.workspace }}/build
-          build-type: Release
-          run-test: true
+          path: ${{ github.workspace }}/build/_deps
+          key: ${{ runner.os }}-cmake-deps-${{ hashFiles('test/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-cmake-deps-
+
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure -C Release
