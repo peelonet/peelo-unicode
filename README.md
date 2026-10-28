@@ -68,6 +68,7 @@ errors are ignored) functions are provided.
 Supported character encodings are:
 
 - [UTF-8]
+- [UTF-7]
 - [UTF-16BE][UTF-16]
 - [UTF-16LE][UTF-16]
 - [UTF-32BE][UTF-32]
@@ -75,6 +76,7 @@ Supported character encodings are:
 - [GB 18030]
 
 [UTF-8]: https://en.wikipedia.org/wiki/UTF-8
+[UTF-7]: https://en.wikipedia.org/wiki/UTF-7
 [UTF-16]: https://en.wikipedia.org/wiki/UTF-16
 [UTF-32]: https://en.wikipedia.org/wiki/UTF-32
 [GB 18030]: https://en.wikipedia.org/wiki/GB_18030

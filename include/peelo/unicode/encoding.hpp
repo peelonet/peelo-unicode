@@ -31,4 +31,5 @@
 #include <peelo/unicode/encoding/utf16le.hpp>
 #include <peelo/unicode/encoding/utf32be.hpp>
 #include <peelo/unicode/encoding/utf32le.hpp>
+#include <peelo/unicode/encoding/utf7.hpp>
 #include <peelo/unicode/encoding/utf8.hpp>
