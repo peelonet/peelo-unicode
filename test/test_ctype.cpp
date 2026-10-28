@@ -22,6 +22,8 @@ TEST_CASE("ctype isalpha")
   REQUIRE(isalpha(U'A'));
   REQUIRE(isalpha(U'ä'));
   REQUIRE(isalpha(U'Ä'));
+  REQUIRE(isalpha(0x0558));   // Unicode 18.0 Armenian modifier letter
+  REQUIRE(isalpha(0x18e00));  // Unicode 18.0 Jurchen
 
   REQUIRE_FALSE(isalpha(U'5'));
   REQUIRE_FALSE(isalpha(U'€'));
@@ -187,6 +189,7 @@ TEST_CASE("ctype isemoji")
   REQUIRE(isemoji(0x1f642));
   REQUIRE(isemoji(0x1f97b));
   REQUIRE(isemoji(0x1face));
+  REQUIRE(isemoji(0x1faf9));  // Unicode 18.0 leftwards thumb sign
 
   REQUIRE_FALSE(isemoji(U'A'));
   REQUIRE_FALSE(isemoji(0x20ac));
