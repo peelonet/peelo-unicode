@@ -3,7 +3,7 @@
 ![Build](https://github.com/peelonet/peelo-unicode/workflows/Build/badge.svg)
 
 Collection of simple to use [Unicode] utilities for C++17. Supports Unicode
-15.1.
+18.0.
 
 [Doxygen generated API documentation.][API]
 

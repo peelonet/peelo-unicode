@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2024, peelo.net
+ * Copyright (c) 2018-2026, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,9 +38,9 @@ namespace peelo::unicode::ctype
   {
     static const std::array<utils::range, 8> blank_table =
     {{
-      { 0x0009, 0x0009 }, { 0x0020, 0x0020 }, { 0x00a0, 0x00a0 },
-      { 0x1680, 0x1680 }, { 0x2000, 0x200a }, { 0x202f, 0x202f },
-      { 0x205f, 0x205f }, { 0x3000, 0x3000 },
+      { 0x0009, 0x0009, }, { 0x0020, 0x0020, }, { 0x00a0, 0x00a0, },
+      { 0x1680, 0x1680, }, { 0x2000, 0x200a, }, { 0x202f, 0x202f, },
+      { 0x205f, 0x205f, }, { 0x3000, 0x3000, },
     }};
 
     return utils::table_lookup(blank_table, c);
