@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2024, peelo.net
+ * Copyright (c) 2018-2026, peelo.net
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,10 +26,12 @@
  */
 #pragma once
 
-#include <array>
 #include <cstring>
 #include <optional>
-#include <string>
+#include <string_view>
+
+#include <peelo/unicode/codec.hpp>
+#include <peelo/unicode/encoding.hpp>
 
 namespace peelo::unicode::bom
 {
@@ -51,6 +53,99 @@ namespace peelo::unicode::bom
     gb18030,
   };
 
+  namespace internal
+  {
+    struct bom_info
+    {
+      const char* bytes;
+      std::size_t length;
+      enum type type;
+    };
+
+    static constexpr std::size_t bom_array_size = 11;
+
+    inline const std::array<bom_info, bom_array_size>&
+    table()
+    {
+      static const std::array<bom_info, bom_array_size> bom_array =
+      {{
+        {
+          "\xef\xbb\xbf",
+          3,
+          type::utf8,
+        },
+        {
+          "\0\0\xfe\xff",
+          4,
+          type::utf32_be,
+        },
+        {
+          "\xff\xfe\0\0",
+          4,
+          type::utf32_le,
+        },
+        {
+          "\xfe\xff",
+          2,
+          type::utf16_be,
+        },
+        {
+          "\xff\xfe",
+          2,
+          type::utf16_le,
+        },
+        {
+          "\x2b\x2f\x76",
+          3,
+          type::utf7,
+        },
+        {
+          "\xf7\x64\x4c",
+          3,
+          type::utf1,
+        },
+        {
+          "\xdd\x73\x66\x73",
+          4,
+          type::utf_ebcdic,
+        },
+        {
+          "\x0e\xfe\xff",
+          3,
+          type::scsu,
+        },
+        {
+          "\xfb\xee\x28",
+          3,
+          type::bocu_1,
+        },
+        {
+          "\x84\x31\x95\x33",
+          4,
+          type::gb18030,
+        },
+      }};
+
+      return bom_array;
+    }
+
+    inline const bom_info*
+    find(type bom_type)
+    {
+      const auto& bom_array = table();
+
+      for (std::size_t i = 0; i < bom_array_size; ++i)
+      {
+        if (bom_array[i].type == bom_type)
+        {
+          return &bom_array[i];
+        }
+      }
+
+      return nullptr;
+    }
+  }
+
   /**
    * Tests whether given byte string contains byte order mark or not.
    *
@@ -62,73 +157,9 @@ namespace peelo::unicode::bom
   inline std::optional<type>
   detect(const char* input, std::size_t length)
   {
-    struct bom_info
-    {
-      const char* bytes;
-      std::size_t length;
-      enum type type;
-    };
-    static constexpr std::size_t bom_array_size = 11;
-    static const std::array<bom_info, bom_array_size> bom_array =
-    {{
-      {
-        "\xef\xbb\xbf",
-        3,
-        type::utf8,
-      },
-      {
-        "\0\0\xfe\xff",
-        4,
-        type::utf32_be,
-      },
-      {
-        "\xff\xfe\0\0",
-        4,
-        type::utf32_le,
-      },
-      {
-        "\xfe\xff",
-        2,
-        type::utf16_be,
-      },
-      {
-        "\xff\xfe",
-        2,
-        type::utf16_le,
-      },
-      {
-        "\x2b\x2f\x76",
-        3,
-        type::utf7,
-      },
-      {
-        "\xf7\x64\x4c",
-        3,
-        type::utf1,
-      },
-      {
-        "\xdd\x73\x66\x73",
-        4,
-        type::utf_ebcdic
-      },
-      {
-        "\x0e\xfe\xff",
-        3,
-        type::scsu
-      },
-      {
-        "\xfb\xee\x28",
-        3,
-        type::bocu_1
-      },
-      {
-        "\x84\x31\x95\x33",
-        4,
-        type::gb18030
-      },
-    }};
+    const auto& bom_array = internal::table();
 
-    for (std::size_t i = 0; i < bom_array_size; ++i)
+    for (std::size_t i = 0; i < internal::bom_array_size; ++i)
     {
       const auto& info = bom_array[i];
 
@@ -157,4 +188,128 @@ namespace peelo::unicode::bom
   {
     return detect(input.c_str(), input.length());
   }
+
+  /**
+   * Returns the byte sequence of the BOM for the given type.
+   */
+  inline std::string_view
+  mark(type bom_type)
+  {
+    if (const auto* info = internal::find(bom_type))
+    {
+      return std::string_view(info->bytes, info->length);
+    }
+
+    return std::string_view();
+  }
+
+  /**
+   * Returns encode and decode functions for the character encoding identified
+   * by the given BOM type.
+   */
+  inline codec
+  codec_for(type bom_type)
+  {
+    switch (bom_type)
+    {
+      case type::utf8:
+        return {
+          encoding::utf8::encode,
+          encoding::utf8::decode,
+          encoding::utf8::encode_validate,
+          encoding::utf8::decode_validate,
+        };
+
+      case type::utf16_be:
+        return {
+          encoding::utf16be::encode,
+          encoding::utf16be::decode,
+          encoding::utf16be::encode_validate,
+          encoding::utf16be::decode_validate,
+        };
+
+      case type::utf16_le:
+        return {
+          encoding::utf16le::encode,
+          encoding::utf16le::decode,
+          encoding::utf16le::encode_validate,
+          encoding::utf16le::decode_validate,
+        };
+
+      case type::utf32_be:
+        return {
+          encoding::utf32be::encode,
+          encoding::utf32be::decode,
+          encoding::utf32be::encode_validate,
+          encoding::utf32be::decode_validate,
+      };
+
+      case type::utf32_le:
+        return {
+          encoding::utf32le::encode,
+          encoding::utf32le::decode,
+          encoding::utf32le::encode_validate,
+          encoding::utf32le::decode_validate,
+        };
+
+      case type::utf7:
+        return {
+          encoding::utf7::encode,
+          encoding::utf7::decode,
+          encoding::utf7::encode_validate,
+          encoding::utf7::decode_validate,
+        };
+
+      case type::utf1:
+        return {
+          encoding::utf1::encode,
+          encoding::utf1::decode,
+          encoding::utf1::encode_validate,
+          encoding::utf1::decode_validate,
+        };
+
+      case type::utf_ebcdic:
+        return {
+          encoding::utf_ebcdic::encode,
+          encoding::utf_ebcdic::decode,
+          encoding::utf_ebcdic::encode_validate,
+          encoding::utf_ebcdic::decode_validate,
+        };
+
+      case type::scsu:
+        return {
+          encoding::scsu::encode,
+          encoding::scsu::decode,
+          encoding::scsu::encode_validate,
+          encoding::scsu::decode_validate,
+        };
+
+      case type::bocu_1:
+        return {
+          encoding::bocu1::encode,
+          encoding::bocu1::decode,
+          encoding::bocu1::encode_validate,
+          encoding::bocu1::decode_validate,
+        };
+
+      case type::gb18030:
+        return {
+          encoding::gb18030::encode,
+          encoding::gb18030::decode,
+          encoding::gb18030::encode_validate,
+          encoding::gb18030::decode_validate,
+        };
+    }
+
+    // Unreachable when all enum values are handled; keep a UTF-8 fallback
+    // for toolchains that warn about missing returns.
+    return {
+      encoding::utf8::encode,
+      encoding::utf8::decode,
+      encoding::utf8::encode_validate,
+      encoding::utf8::decode_validate,
+    };
+  }
 }
+
+
