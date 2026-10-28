@@ -27,6 +27,7 @@
 #pragma once
 
 #include <peelo/unicode/encoding/gb18030.hpp>
+#include <peelo/unicode/encoding/utf1.hpp>
 #include <peelo/unicode/encoding/utf16be.hpp>
 #include <peelo/unicode/encoding/utf16le.hpp>
 #include <peelo/unicode/encoding/utf32be.hpp>
