@@ -1,249 +1,212 @@
-#include <cassert>
+#include <catch2/catch_test_macros.hpp>
 
 #include <peelo/unicode/ctype.hpp>
 
-static void
-test_isvalid()
+TEST_CASE("ctype isvalid")
 {
   using peelo::unicode::ctype::isvalid;
 
-  assert(isvalid(U'a'));
-  assert(isvalid(U' '));
+  REQUIRE(isvalid(U'a'));
+  REQUIRE(isvalid(U' '));
 
-  assert(!isvalid(0x110000));
-  assert(!isvalid(0xfdd5));
-  assert(!isvalid(0xd801));
+  REQUIRE_FALSE(isvalid(0x110000));
+  REQUIRE_FALSE(isvalid(0xfdd5));
+  REQUIRE_FALSE(isvalid(0xd801));
 }
 
-static void
-test_isalpha()
+TEST_CASE("ctype isalpha")
 {
   using peelo::unicode::ctype::isalpha;
 
-  assert(isalpha(U'a'));
-  assert(isalpha(U'A'));
-  assert(isalpha(U'ä'));
-  assert(isalpha(U'Ä'));
+  REQUIRE(isalpha(U'a'));
+  REQUIRE(isalpha(U'A'));
+  REQUIRE(isalpha(U'ä'));
+  REQUIRE(isalpha(U'Ä'));
 
-  assert(!isalpha(U'5'));
-  assert(!isalpha(U'€'));
-  assert(!isalpha(U'-'));
+  REQUIRE_FALSE(isalpha(U'5'));
+  REQUIRE_FALSE(isalpha(U'€'));
+  REQUIRE_FALSE(isalpha(U'-'));
 }
 
-static void
-test_isalnum()
+TEST_CASE("ctype isalnum")
 {
   using peelo::unicode::ctype::isalnum;
 
-  assert(isalnum(U'a'));
-  assert(isalnum(U'A'));
-  assert(isalnum(U'ä'));
-  assert(isalnum(U'Ä'));
-  assert(isalnum(U'5'));
-  assert(isalnum(U'٠'));
+  REQUIRE(isalnum(U'a'));
+  REQUIRE(isalnum(U'A'));
+  REQUIRE(isalnum(U'ä'));
+  REQUIRE(isalnum(U'Ä'));
+  REQUIRE(isalnum(U'5'));
+  REQUIRE(isalnum(U'٠'));
 
-  assert(!isalnum(U' '));
-  assert(!isalnum(U'€'));
+  REQUIRE_FALSE(isalnum(U' '));
+  REQUIRE_FALSE(isalnum(U'€'));
 }
 
-static void
-test_isdigit()
+TEST_CASE("ctype isdigit")
 {
   using peelo::unicode::ctype::isdigit;
 
   for (char32_t c = U'0'; c <= U'9'; ++c)
   {
-    assert(isdigit(c));
+    REQUIRE(isdigit(c));
   }
 
-  assert(!isdigit(U'a'));
-  assert(!isdigit(U'F'));
-  assert(!isdigit(U'€'));
+  REQUIRE_FALSE(isdigit(U'a'));
+  REQUIRE_FALSE(isdigit(U'F'));
+  REQUIRE_FALSE(isdigit(U'€'));
 
-  assert(isdigit(U'٠'));
-  assert(isdigit(U'०'));
-  assert(isdigit(U'০'));
-  assert(isdigit(U'੦'));
-  assert(isdigit(U'൧'));
-  assert(isdigit(U'០'));
-  assert(isdigit(U'᠐'));
+  REQUIRE(isdigit(U'٠'));
+  REQUIRE(isdigit(U'०'));
+  REQUIRE(isdigit(U'০'));
+  REQUIRE(isdigit(U'੦'));
+  REQUIRE(isdigit(U'൧'));
+  REQUIRE(isdigit(U'០'));
+  REQUIRE(isdigit(U'᠐'));
 }
 
-static void
-test_isxdigit()
+TEST_CASE("ctype isxdigit")
 {
   using peelo::unicode::ctype::isxdigit;
 
   for (char32_t c = U'a'; c <= U'f'; ++c)
   {
-    assert(isxdigit(c));
+    REQUIRE(isxdigit(c));
   }
   for (char32_t c = U'A'; c <= U'F'; ++c)
   {
-    assert(isxdigit(c));
+    REQUIRE(isxdigit(c));
   }
   for (char32_t c = U'0'; c <= U'9'; ++c)
   {
-    assert(isxdigit(c));
+    REQUIRE(isxdigit(c));
   }
 
-  assert(!isxdigit(U'g'));
-  assert(!isxdigit(U'G'));
-  assert(!isxdigit(U'€'));
+  REQUIRE_FALSE(isxdigit(U'g'));
+  REQUIRE_FALSE(isxdigit(U'G'));
+  REQUIRE_FALSE(isxdigit(U'€'));
 }
 
-static void
-test_isblank()
+TEST_CASE("ctype isblank")
 {
   using peelo::unicode::ctype::isblank;
 
-  assert(isblank(U' '));
-  assert(isblank(U'\t'));
-  assert(isblank(U'\u2005'));
+  REQUIRE(isblank(U' '));
+  REQUIRE(isblank(U'\t'));
+  REQUIRE(isblank(U'\u2005'));
 
-  assert(!isblank(U'a'));
-  assert(!isblank(U'-'));
-  assert(!isblank(U'€'));
+  REQUIRE_FALSE(isblank(U'a'));
+  REQUIRE_FALSE(isblank(U'-'));
+  REQUIRE_FALSE(isblank(U'€'));
 }
 
-static void
-test_iscntrl()
+TEST_CASE("ctype iscntrl")
 {
   using peelo::unicode::ctype::iscntrl;
 
-  assert(iscntrl(U'\t'));
-  assert(iscntrl(U'\n'));
+  REQUIRE(iscntrl(U'\t'));
+  REQUIRE(iscntrl(U'\n'));
 
-  assert(!iscntrl(U'a'));
-  assert(!iscntrl(U' '));
+  REQUIRE_FALSE(iscntrl(U'a'));
+  REQUIRE_FALSE(iscntrl(U' '));
 }
 
-static void
-test_isgraph()
+TEST_CASE("ctype isgraph")
 {
   using peelo::unicode::ctype::isgraph;
 
-  assert(isgraph(U'a'));
-  assert(isgraph(U'€'));
+  REQUIRE(isgraph(U'a'));
+  REQUIRE(isgraph(U'€'));
 
-  assert(!isgraph(U' '));
-  assert(!isgraph(0x205f));
+  REQUIRE_FALSE(isgraph(U' '));
+  REQUIRE_FALSE(isgraph(0x205f));
 }
 
-static void
-test_isprint()
+TEST_CASE("ctype isprint")
 {
   using peelo::unicode::ctype::isprint;
 
-  assert(isprint(U'a'));
-  assert(isprint(U' '));
+  REQUIRE(isprint(U'a'));
+  REQUIRE(isprint(U' '));
 
-  assert(!isprint(U'\u0008'));
-  assert(!isprint(U'\u074c'));
+  REQUIRE_FALSE(isprint(U'\u0008'));
+  REQUIRE_FALSE(isprint(U'\u074c'));
 }
 
-static void
-test_ispunct()
+TEST_CASE("ctype ispunct")
 {
   using peelo::unicode::ctype::ispunct;
 
-  assert(ispunct(U'\u0023'));
-  assert(ispunct(U'\u037e'));
+  REQUIRE(ispunct(U'\u0023'));
+  REQUIRE(ispunct(U'\u037e'));
 
-  assert(!ispunct(U'a'));
-  assert(!ispunct(U' '));
+  REQUIRE_FALSE(ispunct(U'a'));
+  REQUIRE_FALSE(ispunct(U' '));
 }
 
-static void
-test_isspace()
+TEST_CASE("ctype isspace")
 {
   using peelo::unicode::ctype::isspace;
 
-  assert(isspace(U' '));
-  assert(isspace(U'\t'));
-  assert(isspace(U'\u2001'));
+  REQUIRE(isspace(U' '));
+  REQUIRE(isspace(U'\t'));
+  REQUIRE(isspace(U'\u2001'));
 
-  assert(!isspace(U'a'));
-  assert(!isspace(U'-'));
+  REQUIRE_FALSE(isspace(U'a'));
+  REQUIRE_FALSE(isspace(U'-'));
 }
 
-static void
-test_islower()
+TEST_CASE("ctype islower")
 {
   using peelo::unicode::ctype::islower;
 
-  assert(islower(U'a'));
-  assert(islower(U'ä'));
+  REQUIRE(islower(U'a'));
+  REQUIRE(islower(U'ä'));
 
-  assert(!islower(U'A'));
-  assert(!islower(U'Ä'));
-  assert(!islower(U'5'));
+  REQUIRE_FALSE(islower(U'A'));
+  REQUIRE_FALSE(islower(U'Ä'));
+  REQUIRE_FALSE(islower(U'5'));
 }
 
-static void
-test_isupper()
+TEST_CASE("ctype isupper")
 {
   using peelo::unicode::ctype::isupper;
 
-  assert(isupper(U'A'));
-  assert(isupper(U'Ä'));
+  REQUIRE(isupper(U'A'));
+  REQUIRE(isupper(U'Ä'));
 
-  assert(!isupper(U'a'));
-  assert(!isupper(U'ä'));
-  assert(!isupper(U'5'));
+  REQUIRE_FALSE(isupper(U'a'));
+  REQUIRE_FALSE(isupper(U'ä'));
+  REQUIRE_FALSE(isupper(U'5'));
 }
 
-static void
-test_isemoji()
+TEST_CASE("ctype isemoji")
 {
   using peelo::unicode::ctype::isemoji;
 
-  assert(isemoji(0x1f642));
-  assert(isemoji(0x1f97b));
-  assert(isemoji(0x1face));
+  REQUIRE(isemoji(0x1f642));
+  REQUIRE(isemoji(0x1f97b));
+  REQUIRE(isemoji(0x1face));
 
-  assert(!isemoji(U'A'));
-  assert(!isemoji(0x20ac));
-  assert(!isemoji(0x2513));
+  REQUIRE_FALSE(isemoji(U'A'));
+  REQUIRE_FALSE(isemoji(0x20ac));
+  REQUIRE_FALSE(isemoji(0x2513));
 }
 
-static void
-test_tolower()
+TEST_CASE("ctype tolower")
 {
   using peelo::unicode::ctype::tolower;
 
-  assert(tolower(U'A') == U'a');
-  assert(tolower(U'Ä') == U'ä');
-  assert(tolower(U'5') == U'5');
+  REQUIRE(tolower(U'A') == U'a');
+  REQUIRE(tolower(U'Ä') == U'ä');
+  REQUIRE(tolower(U'5') == U'5');
 }
 
-static void
-test_toupper()
+TEST_CASE("ctype toupper")
 {
   using peelo::unicode::ctype::toupper;
 
-  assert(toupper(U'a') == U'A');
-  assert(toupper(U'ä') == U'Ä');
-  assert(toupper(U'5') == U'5');
-}
-
-int
-main()
-{
-  test_isvalid();
-  test_isalpha();
-  test_isalnum();
-  test_isdigit();
-  test_isxdigit();
-  test_isblank();
-  test_iscntrl();
-  test_isgraph();
-  test_isprint();
-  test_ispunct();
-  test_isspace();
-  test_islower();
-  test_isupper();
-  test_isemoji();
-  test_tolower();
-  test_toupper();
+  REQUIRE(toupper(U'a') == U'A');
+  REQUIRE(toupper(U'ä') == U'Ä');
+  REQUIRE(toupper(U'5') == U'5');
 }

@@ -1,0 +1,27 @@
+name: Documentation
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Doxygen documentation
+        uses: mattnotmitt/doxygen-action@1.12.0
+        with:
+          doxyfile-path: ./Doxyfile
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doxygen
+          destination_dir: .

@@ -26,9 +26,14 @@
  */
 #pragma once
 
+#include <peelo/unicode/encoding/bocu1.hpp>
 #include <peelo/unicode/encoding/gb18030.hpp>
+#include <peelo/unicode/encoding/scsu.hpp>
+#include <peelo/unicode/encoding/utf1.hpp>
 #include <peelo/unicode/encoding/utf16be.hpp>
 #include <peelo/unicode/encoding/utf16le.hpp>
 #include <peelo/unicode/encoding/utf32be.hpp>
 #include <peelo/unicode/encoding/utf32le.hpp>
+#include <peelo/unicode/encoding/utf7.hpp>
 #include <peelo/unicode/encoding/utf8.hpp>
+#include <peelo/unicode/encoding/utf_ebcdic.hpp>

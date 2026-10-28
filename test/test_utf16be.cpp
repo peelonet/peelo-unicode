@@ -1,32 +1,25 @@
-#include <cassert>
+#include <string>
+
+#include <catch2/catch_test_macros.hpp>
 
 #include <peelo/unicode/encoding/utf16be.hpp>
 
-static void
-test_encode()
+TEST_CASE("utf16be encode")
 {
   using peelo::unicode::encoding::utf16be::encode;
 
-  assert(!encode(U"$").compare(std::string("\x00$", 2)));
-  assert(!encode(U"¢").compare(std::string("\x00\xa2", 2)));
-  assert(!encode(U"€").compare(std::string(" \xac", 2)));
-  assert(!encode(U"𐍈").compare(std::string("\xd8\x00\xdfH", 4)));
+  REQUIRE(encode(U"$") == std::string("\x00$", 2));
+  REQUIRE(encode(U"¢") == std::string("\x00\xa2", 2));
+  REQUIRE(encode(U"€") == std::string(" \xac", 2));
+  REQUIRE(encode(U"𐍈") == std::string("\xd8\x00\xdfH", 4));
 }
 
-static void
-test_decode()
+TEST_CASE("utf16be decode")
 {
   using peelo::unicode::encoding::utf16be::decode;
 
-  assert(!decode(std::string("\x00$", 2)).compare(U"$"));
-  assert(!decode(std::string("\x00\xa2", 2)).compare(U"¢"));
-  assert(!decode(std::string(" \xac", 2)).compare(U"€"));
-  assert(!decode(std::string("\xd8\x00\xdfH", 4)).compare(U"𐍈"));
-}
-
-int
-main()
-{
-  test_encode();
-  test_decode();
+  REQUIRE(decode(std::string("\x00$", 2)) == U"$");
+  REQUIRE(decode(std::string("\x00\xa2", 2)) == U"¢");
+  REQUIRE(decode(std::string(" \xac", 2)) == U"€");
+  REQUIRE(decode(std::string("\xd8\x00\xdfH", 4)) == U"𐍈");
 }

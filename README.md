@@ -68,6 +68,11 @@ errors are ignored) functions are provided.
 Supported character encodings are:
 
 - [UTF-8]
+- [UTF-7]
+- [UTF-1]
+- [UTF-EBCDIC]
+- [SCSU]
+- [BOCU-1]
 - [UTF-16BE][UTF-16]
 - [UTF-16LE][UTF-16]
 - [UTF-32BE][UTF-32]
@@ -75,6 +80,11 @@ Supported character encodings are:
 - [GB 18030]
 
 [UTF-8]: https://en.wikipedia.org/wiki/UTF-8
+[UTF-7]: https://en.wikipedia.org/wiki/UTF-7
+[UTF-1]: https://en.wikipedia.org/wiki/UTF-1
+[UTF-EBCDIC]: https://en.wikipedia.org/wiki/UTF-EBCDIC
+[SCSU]: https://en.wikipedia.org/wiki/Standard_Compression_Scheme_for_Unicode
+[BOCU-1]: https://en.wikipedia.org/wiki/Binary_Ordered_Compression_for_Unicode
 [UTF-16]: https://en.wikipedia.org/wiki/UTF-16
 [UTF-32]: https://en.wikipedia.org/wiki/UTF-32
 [GB 18030]: https://en.wikipedia.org/wiki/GB_18030
@@ -121,6 +131,10 @@ The library provides function for detecting whether an byte string contains
 [byte order mark] or not, and which character encoding it is. Even though use
 of BOM is rare these days, it might sometimes be useful to able to detect it.
 
+Once a BOM has been detected, `codec_for()` returns the matching encode and
+decode functions, and `mark()` returns the BOM byte sequence itself (useful for
+skipping it before decoding, or for writing a BOM when encoding).
+
 List of detected character encodings are:
 
 - [UTF-8]
@@ -133,15 +147,9 @@ List of detected character encodings are:
 - [UTF-EBCDIC]
 - [SCSU]
 - [BOCU-1]
-- [GB18030]
+- [GB 18030]
 
 [Byte order mark]: https://en.wikipedia.org/wiki/Byte_order_mark
-[UTF-7]: https://en.wikipedia.org/wiki/UTF-7
-[UTF-1]: https://en.wikipedia.org/wiki/UTF-1
-[UTF-EBCDIC]: https://en.wikipedia.org/wiki/UTF-EBCDIC
-[SCSU]: https://en.wikipedia.org/wiki/Standard_Compression_Scheme_for_Unicode
-[BOCU-1]: https://en.wikipedia.org/wiki/Binary_Ordered_Compression_for_Unicode
-[GB18030]: https://en.wikipedia.org/wiki/GB_18030
 
 ### Example
 
@@ -163,12 +171,11 @@ main()
 
   if (const auto bom = peelo::unicode::bom::detect(buffer, length))
   {
-    if (*bom == peelo::unicode::bom::type::utf16_be)
-    {
-      std::cout << "File has UTF-16BE BOM." << std::endl;
-    } else {
-      std::cout << "File has some other BOM." << std::endl;
-    }
+    const auto mark = peelo::unicode::bom::mark(*bom);
+    const auto codec = peelo::unicode::bom::codec_for(*bom);
+    const auto text = codec.decode(buffer + mark.size(), length - mark.size());
+
+    std::cout << "Decoded " << text.size() << " characters." << std::endl;
   } else {
     std::cout << "File does not contain BOM." << std::endl;
   }

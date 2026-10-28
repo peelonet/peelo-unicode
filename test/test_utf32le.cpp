@@ -1,32 +1,25 @@
-#include <cassert>
+#include <string>
+
+#include <catch2/catch_test_macros.hpp>
 
 #include <peelo/unicode/encoding/utf32le.hpp>
 
-static void
-test_encode()
+TEST_CASE("utf32le encode")
 {
   using peelo::unicode::encoding::utf32le::encode;
 
-  assert(!encode(U"$").compare(std::string("$\x00\x00\x00", 4)));
-  assert(!encode(U"¢").compare(std::string("\xa2\x00\x00\x00", 4)));
-  assert(!encode(U"€").compare(std::string("\xac \x00\x00", 4)));
-  assert(!encode(U"𐍈").compare(std::string("H\x03\x01\x00", 4)));
+  REQUIRE(encode(U"$") == std::string("$\x00\x00\x00", 4));
+  REQUIRE(encode(U"¢") == std::string("\xa2\x00\x00\x00", 4));
+  REQUIRE(encode(U"€") == std::string("\xac \x00\x00", 4));
+  REQUIRE(encode(U"𐍈") == std::string("H\x03\x01\x00", 4));
 }
 
-static void
-test_decode()
+TEST_CASE("utf32le decode")
 {
   using peelo::unicode::encoding::utf32le::decode;
 
-  assert(!decode("$\x00\x00\x00", 4).compare(U"$"));
-  assert(!decode("\xa2\x00\x00\x00", 4).compare(U"¢"));
-  assert(!decode("\xac \x00\x00", 4).compare(U"€"));
-  assert(!decode("H\x03\x01\x00", 4).compare(U"𐍈"));
-}
-
-int
-main()
-{
-  test_encode();
-  test_decode();
+  REQUIRE(decode("$\x00\x00\x00", 4) == U"$");
+  REQUIRE(decode("\xa2\x00\x00\x00", 4) == U"¢");
+  REQUIRE(decode("\xac \x00\x00", 4) == U"€");
+  REQUIRE(decode("H\x03\x01\x00", 4) == U"𐍈");
 }
